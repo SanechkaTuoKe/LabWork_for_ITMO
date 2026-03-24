@@ -8,7 +8,7 @@ class CommandService() {
     private val commandList = mapOf<String, BaseHandler>(
         "exit" to ExitHandler(),
         "help" to HelpHandler(),
-        "inst_add" to InstAddHandler(),
+        "InstAdd" to InstAddHandler(),
         "InstList" to InstListHandler(),
         "InstShow" to InstShowHandler(),
         "CalAdd" to CalAddHandler(),

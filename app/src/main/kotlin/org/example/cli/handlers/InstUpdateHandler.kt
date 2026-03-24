@@ -59,5 +59,5 @@ class InstUpdateHandler : BaseHandler {
     }
 
     override fun help(): String =
-        "inst_update <id> field=value ...  - Update instrument fields (name, location, status)"
+        "InstUpdate <id> field=value ...  - Update instrument fields (name, location, status)"
 }

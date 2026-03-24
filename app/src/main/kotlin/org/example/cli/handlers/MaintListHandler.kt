@@ -50,5 +50,5 @@ class MaintListHandler : BaseHandler {
     }
 
     override fun help(): String =
-        "maint_list <instrument_id> [--last N]  - list last N maintenance records for instrument"
+        "MaintList <instrument_id> [--last N]  - list last N maintenance records for instrument"
 }

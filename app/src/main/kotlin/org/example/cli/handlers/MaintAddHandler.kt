@@ -56,5 +56,5 @@ class MaintAddHandler : BaseHandler {
     }
 
     override fun help(): String =
-        "maint_add <instrument_id>  - Add maintenance/repair record interactively"
+        "MaintAdd <instrument_id>  - Add maintenance/repair record interactively"
 }

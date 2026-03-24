@@ -47,5 +47,5 @@ class InstDueHandler : BaseHandler {
     }
 
     override fun help(): String =
-        "inst_due [--days N]  - show instruments whose last calibration is older than N days"
+        "InstDue [--days N]  - show instruments which last calibration is older than N days"
 }

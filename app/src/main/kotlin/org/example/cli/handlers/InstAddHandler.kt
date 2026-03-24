@@ -40,5 +40,5 @@ class InstAddHandler: BaseHandler {
 
     }
 
-    override fun help(): String = "Inst_add - add instrument"
+    override fun help(): String = "InstAdd - add instrument"
 }

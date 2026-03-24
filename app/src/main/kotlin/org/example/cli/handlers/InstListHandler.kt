@@ -38,5 +38,5 @@ class InstListHandler : BaseHandler {
     }
 
     override fun help(): String =
-        "instlist  [--type TYPE] [--status ACTIVE|OUT_OF_SERVICE]  - list of instruments"
+        "Instlist  [--type TYPE] [--status ACTIVE|OUT_OF_SERVICE]  - list of instruments"
 }

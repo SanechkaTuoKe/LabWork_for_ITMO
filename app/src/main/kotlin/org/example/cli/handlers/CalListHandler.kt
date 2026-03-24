@@ -54,5 +54,5 @@ class CalListHandler : BaseHandler {
     }
 
     override fun help(): String =
-        "cal_list <instrument_id> [--last N]  - list last N calibrations for instrument"
+        "CalList <instrument_id> [--last N]  - list last N calibrations for instrument"
 }
