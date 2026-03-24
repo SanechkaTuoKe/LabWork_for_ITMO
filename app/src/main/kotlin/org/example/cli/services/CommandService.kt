@@ -12,11 +12,11 @@ class CommandService() {
         "InstList" to InstListHandler(),
         "InstShow" to InstShowHandler(),
         "CalAdd" to CalAddHandler(),
-        "inst_update" to InstUpdateHandler(),
-        "cal_list" to CalListHandler(),
-        "maint_add" to MaintAddHandler(),
-        "maint_list" to MaintListHandler(),
-        "inst_due" to InstDueHandler()
+        "InstUpdate" to InstUpdateHandler(),
+        "CalList" to CalListHandler(),
+        "MaintAdd" to MaintAddHandler(),
+        "MaintList" to MaintListHandler(),
+        "InstDue" to InstDueHandler()
     )
     private val instrumentService = InstrumentService()
     fun readCommand( commands : List<String>) : Boolean {
