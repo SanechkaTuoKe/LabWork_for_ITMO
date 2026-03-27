@@ -40,22 +40,13 @@ class InstUpdateHandler : BaseHandler {
             val key = split[0].lowercase()
             val value = split[1].trim('"')
 
-            when (key) {
-                "name" -> instrument.name = value
-                "location" -> instrument.location = value
-                "status" -> {
-                    try {
-                        instrument.status = InstrumentStatus.valueOf(value.uppercase())
-                    } catch (e: Exception) {
-                        println("Invalid status: $value")
-                    }
-                }
-                else -> println("Unknown field: $key")
-            }
+            instrumentService.update(id, updates)
+            println("OK")
+            true
+        } catch (e: Exception) {
+            ErrorHandler.handle(e)
+            true
         }
-
-        println("OK")
-        return true
     }
 
     override fun help(): String =
