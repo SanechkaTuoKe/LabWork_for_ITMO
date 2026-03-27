@@ -6,7 +6,10 @@ import org.example.validation.MaintenanceValidator
 import java.time.Instant
 import java.util.*
 
-class MaintenanceService(private val instrumentService: InstrumentService) {
+class MaintenanceService(
+    private val instrumentService: InstrumentService
+) {
+
     private val maintenances = TreeMap<Long, Maintenance>()
     private var nextId = 1L
 
@@ -17,17 +20,17 @@ class MaintenanceService(private val instrumentService: InstrumentService) {
         ownerUsername: String = "SYSTEM",
         doneAt: Instant = Instant.now()
     ): Maintenance {
-        if (instrumentService.getById(instrumentId) == null) {
-            throw IllegalArgumentException("Ошибка: прибор с id=$instrumentId не найден")
-        }
 
-        MaintenanceValidator.validateDetails(details)
+        val instrument = instrumentService.getById(instrumentId)
+            ?: throw IllegalArgumentException("Instrument with id=$instrumentId not found")
+
+        val validatedDetails = MaintenanceValidator.validateDetails(details)
 
         val maintenance = Maintenance(
             id = nextId++,
-            instrumentId = instrumentId,
+            instrumentId = instrument.id,
             type = type,
-            details = details,
+            details = validatedDetails,
             doneAt = doneAt,
             ownerUsername = ownerUsername,
             createdAt = Instant.now()
@@ -38,34 +41,25 @@ class MaintenanceService(private val instrumentService: InstrumentService) {
     }
 
     fun getById(id: Long): Maintenance =
-        maintenances[id] ?: throw NoSuchElementException("Ошибка: обслуживание с id=$id не найдено")
+        maintenances[id]
+            ?: throw NoSuchElementException("Maintenance with id=$id not found")
 
     fun listByInstrument(instrumentId: Long, last: Int? = null): List<Maintenance> {
-        if (instrumentService.getById(instrumentId) == null) {
-            throw IllegalArgumentException("Ошибка: прибор с id=$instrumentId не найден")
+
+        require(instrumentService.getById(instrumentId) != null) {
+            "Instrument with id=$instrumentId not found"
         }
 
-        val result = maintenances.values
+        val list = maintenances.values
+            .asSequence()
             .filter { it.instrumentId == instrumentId }
             .sortedByDescending { it.doneAt }
+            .toList()
 
-        return if (last != null && last > 0) {
-            result.take(last)
-        } else {
-            result
-        }
+        return if (last != null && last > 0) list.take(last) else list
     }
 
-    fun getByInstrumentID(instrumentID: Long) =
-        maintenances.filterValues {
-            it.instrumentId == instrumentID
-        }
-
-    fun removeById(instrumentId: Long) {
-        getByInstrumentID(instrumentId)
-            .forEach {
-                maintenances.remove(it.key)
-            }
-
+    fun removeByInstrumentId(instrumentId: Long) {
+        maintenances.entries.removeIf { it.value.instrumentId == instrumentId }
     }
 }

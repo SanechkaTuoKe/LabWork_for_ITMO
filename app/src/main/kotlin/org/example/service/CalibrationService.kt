@@ -1,41 +1,43 @@
 package org.example.service
 
-import org.example.domain.Calibration
-import org.example.domain.InstrumentStatus
+import org.example.domain.*
 import org.example.validation.CalibrationValidator
 import java.time.Instant
 import java.util.*
 
-class CalibrationService(private val instrumentService: InstrumentService) {
+class CalibrationService(
+    private val instrumentService: InstrumentService
+) {
 
     private val calibrations = TreeMap<Long, Calibration>()
     private var nextId = 1L
 
-    // Добавление калибровки
     fun add(
         instrumentId: Long,
-        type: Int,
-        result: String,
-        comment: String? = "",
+        typeInput: String,
+        resultInput: String,
+        comment: String? = null,
         ownerUsername: String = "SYSTEM",
         calibratedAt: Instant = Instant.now()
     ): Calibration {
+
         val instrument = instrumentService.getById(instrumentId)
-            ?: throw IllegalArgumentException("Ошибка: прибор с id=$instrumentId не найден")
+            ?: throw IllegalArgumentException("Instrument with id=$instrumentId not found")
 
         if (instrument.status != InstrumentStatus.ACTIVE) {
-            throw IllegalArgumentException("Ошибка: прибор не в работе")
+            throw IllegalArgumentException("Instrument is not ACTIVE")
         }
 
-        CalibrationValidator.validateResult(result)
-        CalibrationValidator.validateComment(comment)
+        val type = CalibrationValidator.validateType(typeInput)
+        val result = CalibrationValidator.validateResult(resultInput)
+        val validatedComment = CalibrationValidator.validateComment(comment)
 
         val calibration = Calibration(
             id = nextId++,
-            instrumentId = instrumentId,
+            instrumentId = instrument.id,
             type = type,
             result = result,
-            comment = comment ?: "",
+            comment = validatedComment,
             calibratedAt = calibratedAt,
             ownerUsername = ownerUsername,
             createdAt = Instant.now()
@@ -45,33 +47,26 @@ class CalibrationService(private val instrumentService: InstrumentService) {
         return calibration
     }
 
-    // Получить калибровку по ID
     fun getById(id: Long): Calibration =
-        calibrations[id] ?: throw NoSuchElementException("Ошибка: калибровка с id=$id не найдена")
+        calibrations[id]
+            ?: throw NoSuchElementException("Calibration with id=$id not found")
 
-    // Список калибровок прибора, с опцией взять только последние N
     fun listByInstrument(instrumentId: Long, last: Int? = null): List<Calibration> {
-        if (instrumentService.getById(instrumentId) == null) {
-            throw IllegalArgumentException("Ошибка: прибор с id=$instrumentId не найден")
+
+        require(instrumentService.getById(instrumentId) != null) {
+            "Instrument with id=$instrumentId not found"
         }
 
-        val result = calibrations.values
+        val list = calibrations.values
+            .asSequence()
             .filter { it.instrumentId == instrumentId }
             .sortedByDescending { it.calibratedAt }
+            .toList()
 
-        return if (last != null && last > 0) result.take(last) else result
+        return if (last != null && last > 0) list.take(last) else list
     }
 
-    // Метод для InstrumentService и CalListHandler
-    fun listForInstrument(instrumentId: Long): List<Calibration> =
-        listByInstrument(instrumentId)
-
-    // Метод для удаления калибровок прибора
-    fun removeByInstrumentId(instrumentId: Long) =
-        calibrations.filterValues { it.instrumentId == instrumentId }
-            .keys.forEach { calibrations.remove(it) }
-
-    // Дополнительно: получить все калибровки прибора как Map (id -> Calibration)
-    fun getByInstrumentID(instrumentID: Long): Map<Long, Calibration> =
-        calibrations.filterValues { it.instrumentId == instrumentID }
+    fun removeByInstrumentId(instrumentId: Long) {
+        calibrations.entries.removeIf { it.value.instrumentId == instrumentId }
+    }
 }

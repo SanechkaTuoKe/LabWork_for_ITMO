@@ -1,24 +1,31 @@
 package org.example.validation
+
 import org.example.domain.CalibrationResult
+import org.example.domain.CalibrationType
 
 object CalibrationValidator {
-    private const val MAX_COMMENT_LENGTH = 128
 
-    fun validateResult(result: String) {
-        if (result != "OK" && result != "FAIL") {
+    fun validateType(input: String): CalibrationType {
+        return try {
+            CalibrationType.valueOf(input.uppercase())
+        } catch (e: IllegalArgumentException) {
             throw IllegalArgumentException(
-                "Ошибка: результат должен быть OK или FAIL"
+                "Invalid calibration type. Allowed: ONE_POINT, TWO_POINT"
             )
         }
     }
 
-    fun validateComment(comment: String?) {
-        if (comment != null && comment.length > MAX_COMMENT_LENGTH) {
+    fun validateResult(input: String): CalibrationResult {
+        return try {
+            CalibrationResult.valueOf(input.uppercase())
+        } catch (e: IllegalArgumentException) {
             throw IllegalArgumentException(
-                "Ошибка: комментарий должен быть до $MAX_COMMENT_LENGTH символов"
+                "Invalid calibration result. Allowed: OK, FAIL"
             )
         }
     }
 
-    fun validateType(typeInput: String) {}
+    fun validateComment(comment: String?): String {
+        return comment?.trim().orEmpty()
+    }
 }

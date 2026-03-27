@@ -1,12 +1,21 @@
 package org.example.validation
 
-object MaintenanceValidator {
-    private const val MAX_DETAILS_LENGTH = 128
+import org.example.domain.MaintenanceType
 
-    fun validateDetails(details: String) {
-        require(details.isNotBlank()) { "Ошибка: описание не может быть пустым" }
-        require(details.length <= MAX_DETAILS_LENGTH) {
-            "Ошибка: описание должно быть до $MAX_DETAILS_LENGTH символов"
+object MaintenanceValidator {
+
+    fun validateType(typeInput: String): MaintenanceType {
+        return try {
+            MaintenanceType.valueOf(typeInput.uppercase())
+        } catch (e: IllegalArgumentException) {
+            throw IllegalArgumentException("Maintenance type must be SERVICE or REPAIR")
         }
+    }
+
+    fun validateDetails(details: String): String {
+        if (details.isBlank()) {
+            throw IllegalArgumentException("Details cannot be empty")
+        }
+        return details
     }
 }

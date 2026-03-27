@@ -3,12 +3,13 @@ package org.example.service
 import org.example.domain.*
 import org.example.validation.InstrumentValidator
 import java.time.Instant
+import java.util.*
 
 class InstrumentService {
-    private val instruments = mutableMapOf<Long, Instrument>()
+
+    private val instruments = TreeMap<Long, Instrument>()
     private var nextId = 1L
-    private val calibrationService = CalibrationService(this)
-    private val maintenanceService = MaintenanceService(this)
+
     fun add(
         name: String,
         type: InstrumentType,
@@ -16,80 +17,82 @@ class InstrumentService {
         location: String,
         ownerUsername: String = "SYSTEM"
     ): Instrument {
+
         InstrumentValidator.validateName(name)
         InstrumentValidator.validateLocation(location)
-        InstrumentValidator.validateInventoryNumber(inventoryNumber)
+
+        val validatedInventory = inventoryNumber
+            ?.takeIf { it.isNotBlank() }
+            ?.also { InstrumentValidator.validateInventoryNumber(it) }
 
         val now = Instant.now()
+
         val instrument = Instrument(
             id = nextId++,
             name = name,
             type = type,
-            inventoryNumber = inventoryNumber,
+            inventoryNumber = validatedInventory,
             location = location,
             status = InstrumentStatus.ACTIVE,
             ownerUsername = ownerUsername,
             createdAt = now,
             updatedAt = now
         )
+
         instruments[instrument.id] = instrument
         return instrument
     }
 
     fun getById(id: Long): Instrument? = instruments[id]
-    fun getAll(): List<Instrument> = instruments.values.toList()
 
-    fun list(type: InstrumentType?, status: InstrumentStatus?): List<Instrument> =
-        instruments.values.filter {
-            (type == null || it.type == type) && (status == null || it.status == status)
+    fun getByIdOrThrow(id: Long): Instrument =
+        instruments[id]
+            ?: throw NoSuchElementException("Instrument with id=$id not found")
+
+    fun getAll(): List<Instrument> =
+        instruments.values.toList()
+
+    fun update(
+        id: Long,
+        name: String? = null,
+        location: String? = null,
+        inventoryNumber: String? = null
+    ): Instrument {
+
+        val instrument = getByIdOrThrow(id)
+
+        name?.let {
+            InstrumentValidator.validateName(it)
+            instrument.name = it
         }
 
-    fun update(id: Long, updates: Map<String, String>): Boolean {
-        val instrument = getById(id) ?: return false
+        location?.let {
+            InstrumentValidator.validateLocation(it)
+            instrument.location = it
+        }
 
-        updates.forEach { (key, value) ->
-            when (key.lowercase()) {
-                "name" -> {
-                    InstrumentValidator.validateName(value)
-                    instrument.name = value
-                }
-                "location" -> {
-                    InstrumentValidator.validateLocation(value)
-                    instrument.location = value
-                }
-                "status" -> {
-                    try {
-                        instrument.status = InstrumentStatus.valueOf(value.uppercase())
-                    } catch (e: Exception) {
-                        println("Invalid status: $value")
-                    }
-                }
-                else -> println("Unknown field: $key")
-            }
+        if (inventoryNumber != null) {
+            instrument.inventoryNumber =
+                inventoryNumber.takeIf { it.isNotBlank() }
+                    ?.also { InstrumentValidator.validateInventoryNumber(it) }
         }
 
         instrument.updatedAt = Instant.now()
-        return true
+        return instrument
     }
 
-    fun remove(id: Long) {
-        calibrationService.removeByInstrumentId(id) // здесь используем метод из CalibrationService
-        maintenanceService.removeById(id)
+    fun changeStatus(id: Long, status: InstrumentStatus): Instrument {
+        val instrument = getByIdOrThrow(id)
+        instrument.status = status
+        instrument.updatedAt = Instant.now()
+        return instrument
+    }
+
+    fun delete(id: Long) {
         if (instruments.remove(id) == null) {
-            throw NoSuchElementException("Ошибка: прибор с id=$id не найден")
+            throw NoSuchElementException("Instrument with id=$id not found")
         }
     }
 
-    fun listCalibrations(instrumentId: Long): List<Calibration> =
-        calibrationService.listForInstrument(instrumentId)
-
-    fun getByTypeOrStatus(type: InstrumentType?, status: InstrumentStatus?): Collection<Instrument> {
-        var result: Collection<Instrument> = instruments.values
-        if (type != null) result = result.filter { it.type == type }
-        if (status != null) result = result.filter { it.status == status }
-        return result
-    }
-
-    fun listMaintenances(instrumentId: Long) =
-        maintenanceService.listByInstrument(instrumentId)
+    fun exists(id: Long): Boolean = instruments.containsKey(id)
 }

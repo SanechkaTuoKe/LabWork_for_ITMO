@@ -6,37 +6,38 @@ import org.example.domain.InstrumentType
 import org.example.service.InstrumentService
 
 class InstListHandler : BaseHandler {
+
     override fun handle(
         params: List<String>,
         instrumentService: InstrumentService,
         commandList: Collection<BaseHandler>
     ): Boolean {
-        val typeAsString = Param.paramValue(params, "type")
-        var type : InstrumentType? = null
-        var status : InstrumentStatus? = null
-        if(typeAsString != null) {
-            try {
-                type = InstrumentType.valueOf(typeAsString)
-            }
-            catch (@Suppress("unused") e : Exception) {
-                println("Type not found")
+
+        val type = Param.paramValue(params, "type")?.let {
+            try { InstrumentType.valueOf(it.uppercase()) }
+            catch (e: Exception) {
+                println("Invalid type")
                 return true
             }
         }
-        val statusAsString = Param.paramValue(params, "status")
-        if (statusAsString != null) {
-            try {
-                status = InstrumentStatus.valueOf(statusAsString)
-            }
-            catch (@Suppress("unused") e : Exception) {
-                println("Status not found")
+
+        val status = Param.paramValue(params, "status")?.let {
+            try { InstrumentStatus.valueOf(it.uppercase()) }
+            catch (e: Exception) {
+                println("Invalid status")
                 return true
             }
         }
-        println(instrumentService.list(type, status).joinToString(",\n"))
+
+        val list = instrumentService.getAll().filter {
+            (type == null || it.type == type) &&
+                    (status == null || it.status == status)
+        }
+
+        println(list.joinToString(",\n"))
         return true
     }
 
     override fun help(): String =
-        "Instlist  [--type TYPE] [--status ACTIVE|OUT_OF_SERVICE]  - list of instruments"
+        "inst_list [--type TYPE] [--status ACTIVE|OUT_OF_SERVICE]"
 }

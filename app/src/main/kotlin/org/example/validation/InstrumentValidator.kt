@@ -1,25 +1,33 @@
 package org.example.validation
 
-import org.example.domain.Instrument
+import org.example.domain.InstrumentType
 
 object InstrumentValidator {
-    private const val MAX_NAME_LENGTH = 128
-    private const val MAX_LOCATION_LENGTH = 64
-    private const val MAX_INVENTORY_LENGTH = 32
 
     fun validateName(name: String) {
-        require(name.isNotBlank()) { "Ошибка: название не может быть пустым" }
-        require(name.length <= MAX_NAME_LENGTH) { "Ошибка: название должно быть до $MAX_NAME_LENGTH символов" }
+        if (name.isBlank()) {
+            throw IllegalArgumentException("Name cannot be empty")
+        }
+    }
+
+    fun validateType(typeNum: Int): InstrumentType {
+        if (typeNum !in 1..InstrumentType.values().size) {
+            throw IllegalArgumentException(
+                "Instrument type must be from 1 to ${InstrumentType.values().size}"
+            )
+        }
+        return InstrumentType.values()[typeNum - 1]
+    }
+
+    fun validateInventoryNumber(inventory: String) {
+        if (inventory.isBlank()) {
+            throw IllegalArgumentException("Inventory number cannot be empty")
+        }
     }
 
     fun validateLocation(location: String) {
-        require(location.isNotBlank()) { "Ошибка: местоположение не может быть пустым" }
-        require(location.length <= MAX_LOCATION_LENGTH) { "Ошибка: местоположение должно быть до $MAX_LOCATION_LENGTH символов" }
-    }
-
-    fun validateInventoryNumber(inv: String?) {
-        inv?.let {
-            require(it.length <= MAX_INVENTORY_LENGTH) { "Ошибка: инвентарный номер должен быть до $MAX_INVENTORY_LENGTH символов" }
+        if (location.isBlank()) {
+            throw IllegalArgumentException("Location cannot be empty")
         }
     }
 }

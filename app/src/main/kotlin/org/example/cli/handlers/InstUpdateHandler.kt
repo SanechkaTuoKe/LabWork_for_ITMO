@@ -1,8 +1,5 @@
 package org.example.cli.handlers
 
-import org.example.cli.util.Param
-import org.example.domain.Instrument
-import org.example.domain.InstrumentStatus
 import org.example.service.InstrumentService
 
 class InstUpdateHandler : BaseHandler {
@@ -12,37 +9,24 @@ class InstUpdateHandler : BaseHandler {
         instrumentService: InstrumentService,
         commandList: Collection<BaseHandler>
     ): Boolean {
+        return try {
+            val id = params.getOrNull(0)?.toLongOrNull()
+                ?: throw IllegalArgumentException("Invalid instrument ID")
 
-        val id = params.getOrNull(0)?.toLongOrNull()
-        if (id == null) {
-            println("Invalid instrument id")
-            return true
-        }
-
-        if (params.size < 2) {
-            println("No fields to update")
-            return true
-        }
-
-        val instrument = instrumentService.getById(id)
-        if (instrument == null) {
-            println("Instrument not found")
-            return true
-        }
-
-        val updates = mutableMapOf<String, String>()
-        for (param in params.subList(1, params.size)) {
-            val split = param.split("=", limit = 2)
-            if (split.size != 2) {
-                println("Invalid parameter format: $param")
-                continue
+            val updates = params.drop(1).associate {
+                val (k, v) = it.split("=", limit = 2)
+                k to v.trim('"')
             }
-            val key = split[0].lowercase()
-            val value = split[1].trim('"')
 
-            instrumentService.update(id, updates)
+            val name = updates["name"]
+            val location = updates["location"]
+            val inventory = updates["inventoryNumber"]
+
+            instrumentService.update(id, name, location, inventory)
+
             println("OK")
             true
+
         } catch (e: Exception) {
             ErrorHandler.handle(e)
             true
@@ -50,5 +34,5 @@ class InstUpdateHandler : BaseHandler {
     }
 
     override fun help(): String =
-        "InstUpdate <id> field=value ...  - Update instrument fields (name, location, status)"
+        "inst_update <id> name=... location=... inventoryNumber=..."
 }

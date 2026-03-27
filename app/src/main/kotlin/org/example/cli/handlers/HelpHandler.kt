@@ -8,11 +8,10 @@ class HelpHandler : BaseHandler {
         instrumentService: InstrumentService,
         commandList: Collection<BaseHandler>
     ): Boolean {
-        println(commandList.joinToString("\n") {
-            it.help()
-        })
+        println("Available commands:")
+        commandList.forEach { println(it.help()) }
         return true
     }
-    override fun help(): String =
-        "help - list of commands"
+
+    override fun help(): String = "help - Show this help"
 }
