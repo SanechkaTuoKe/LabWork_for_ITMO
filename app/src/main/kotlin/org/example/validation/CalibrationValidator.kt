@@ -19,4 +19,6 @@ object CalibrationValidator {
             )
         }
     }
+
+    fun validateType(typeInput: String) {}
 }
