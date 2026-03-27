@@ -61,14 +61,14 @@ class InstrumentService {
 
         val instrument = getByIdOrThrow(id)
 
-        name?.let {
-            InstrumentValidator.validateName(it)
-            instrument.name = it
+        if (name != null) {
+            InstrumentValidator.validateName(name)
+            instrument.name = name
         }
 
-        location?.let {
-            InstrumentValidator.validateLocation(it)
-            instrument.location = it
+        if (location != null) {
+            InstrumentValidator.validateLocation(location)
+            instrument.location = location
         }
 
         if (inventoryNumber != null) {

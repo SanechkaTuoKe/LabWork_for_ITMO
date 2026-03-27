@@ -57,7 +57,7 @@ class CalibrationService(
             "Instrument with id=$instrumentId not found"
         }
 
-        val list = calibrations.values
+        val list: List<Calibration> = calibrations.values
             .asSequence()
             .filter { it.instrumentId == instrumentId }
             .sortedByDescending { it.calibratedAt }

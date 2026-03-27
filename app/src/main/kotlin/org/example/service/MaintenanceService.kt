@@ -50,11 +50,9 @@ class MaintenanceService(
             "Instrument with id=$instrumentId not found"
         }
 
-        val list = maintenances.values
-            .asSequence()
+        val list: List<Maintenance> = maintenances.values
             .filter { it.instrumentId == instrumentId }
             .sortedByDescending { it.doneAt }
-            .toList()
 
         return if (last != null && last > 0) list.take(last) else list
     }
