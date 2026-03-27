@@ -1,12 +1,20 @@
 package org.example.cli.services
 
-
 class LoopService {
+
     private val readerService = ReaderService()
     private val commandService = CommandService()
 
     fun loopOfCommands() {
-        @Suppress("ControlFlowWithEmptyBody")
-        while (commandService.readCommand(readerService.readCommand())){}
+        while (true) {
+            val input = readerService.readCommand()
+
+            val shouldContinue = commandService.execute(input)
+
+            if (!shouldContinue) {
+                println("Bye!")
+                break
+            }
+        }
     }
 }

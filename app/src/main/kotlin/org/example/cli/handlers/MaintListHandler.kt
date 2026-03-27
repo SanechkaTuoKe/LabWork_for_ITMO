@@ -1,7 +1,10 @@
 package org.example.cli.handlers
 
+import org.example.cli.util.Param
 import org.example.service.MaintenanceService
 import org.example.service.InstrumentService
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 class MaintListHandler(
     private val maintenanceService: MaintenanceService
@@ -14,19 +17,28 @@ class MaintListHandler(
     ): Boolean {
         return try {
             val instrumentId = params.getOrNull(0)?.toLongOrNull()
-                ?: throw IllegalArgumentException("Invalid id")
+                ?: throw IllegalArgumentException("Invalid instrument id")
 
-            val list = maintenanceService.listByInstrument(instrumentId)
+            val last = Param.paramValue(params, "last")?.toIntOrNull()
+
+            val list = maintenanceService.listByInstrument(instrumentId, last)
 
             if (list.isEmpty()) {
                 println("No maintenance records")
                 return true
             }
 
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+
             println("ID  TYPE  DATE  DETAILS")
 
             list.forEach {
-                println("${it.id} ${it.type} ${it.doneAt} ${it.details}")
+                val date = it.doneAt
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate()
+                    .format(formatter)
+
+                println("${it.id} ${it.type} $date ${it.details}")
             }
 
             true
@@ -38,5 +50,5 @@ class MaintListHandler(
     }
 
     override fun help(): String =
-        "maint_list <instrument_id>"
+        "maint_list <instrument_id> [--last N]"
 }
