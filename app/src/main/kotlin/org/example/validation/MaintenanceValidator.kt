@@ -17,5 +17,8 @@ object MaintenanceValidator {
             throw IllegalArgumentException("Details cannot be empty")
         }
         return details
+        if (details.length > 128) {
+            throw IllegalArgumentException("Details must be ≤ 128 characters")
+        }
     }
 }

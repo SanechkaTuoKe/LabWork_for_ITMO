@@ -26,6 +26,10 @@ object CalibrationValidator {
     }
 
     fun validateComment(comment: String?): String {
-        return comment?.trim().orEmpty()
+        val trimmed = comment?.trim().orEmpty()
+        if (trimmed.length > 128) {
+            throw IllegalArgumentException("Comment must be ≤ 128 characters")
+        }
+        return trimmed
     }
 }
