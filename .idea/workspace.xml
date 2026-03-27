@@ -5,20 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="854374bb-eed7-42f4-a74d-ca8fcde7fecf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/CalShowHandler.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/test/kotlin/org/example/CLI/CommandServiceTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/test/kotlin/org/example/CLI/MaintListHandlerTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/test/kotlin/org/example/service/CalibrationServiceTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/test/kotlin/org/example/service/InstrumentServiceTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/test/kotlin/org/example/service/MaintenanceServiceTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/test/kotlin/org/example/validator/CalibrationValidatorTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/test/kotlin/org/example/validator/InstrumentValidatorTest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/test/kotlin/org/example/validator/MaintenanceValidatorTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/test/kotlin/org/example/cli/handlers/ErrorHandlerTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/test/kotlin/org/example/cli/handlers/InstAddHandlerTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/test/kotlin/org/example/cli/handlers/MaintListHandlerTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/test/kotlin/org/example/cli/service/CommandServiceSimpleTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/test/kotlin/org/example/cli/service/CommandServiceTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/InstShowHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/InstShowHandler.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/MaintListHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/MaintListHandler.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/services/CommandService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/services/CommandService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/services/LoopService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/services/LoopService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/kotlin/org/example/CLI/CommandServiceTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/kotlin/org/example/CLI/MaintListHandlerTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/kotlin/org/example/service/CalibrationServiceTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/kotlin/org/example/service/CalibrationServiceTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/kotlin/org/example/service/InstrumentServiceTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/kotlin/org/example/service/InstrumentServiceTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/kotlin/org/example/service/MaintenanceServiceTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/kotlin/org/example/service/MaintenanceServiceTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/kotlin/org/example/validator/CalibrationValidatorTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/kotlin/org/example/validator/CalibrationValidatorTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/kotlin/org/example/validator/InstrumentValidatorTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/kotlin/org/example/validator/InstrumentValidatorTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/kotlin/org/example/validator/MaintenanceValidatorTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/kotlin/org/example/validator/MaintenanceValidatorTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,19 +65,25 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.PuTao:app [:app:org.example.AppKt.main()].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Projects/PuTao&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.PuTao:app [:app:org.example.AppKt.main()].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Merging main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/User/Projects/PuTao"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="K2MoveDeclarationsDialog.RECENT_PACKAGE_KEY">
+      <recent name="org.example.CLI.service" />
+      <recent name="org.example.CLI.handlers" />
+    </key>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="854374bb-eed7-42f4-a74d-ca8fcde7fecf" name="Changes" comment="" />

@@ -13,7 +13,7 @@ class CommandService {
 
         "inst_add" to InstAddHandler(),
         "inst_list" to InstListHandler(),
-        "inst_show" to InstShowHandler(),
+        "inst_show" to InstShowHandler(calibrationService),
         "inst_update" to InstUpdateHandler(),
         "inst_due" to InstDueHandler(calibrationService),
 

@@ -1,11 +1,13 @@
 package org.example.service
 
-import org.example.domain.CalibrationResult
 import org.example.domain.InstrumentType
-import org.example.domain.InstrumentStatus
+import org.example.domain.CalibrationResult
+import org.example.domain.CalibrationType
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 
 class CalibrationServiceTest {
 
@@ -16,28 +18,70 @@ class CalibrationServiceTest {
     @BeforeEach
     fun setup() {
         instrumentService = InstrumentService()
-        instrumentId = instrumentService.add(
-            name = "pH meter Mettler A1",
+        val instrument = instrumentService.add(
+            name = "pH Meter",
             type = InstrumentType.PH_METER,
-            inventoryNumber = "INV-00077",  // исправлено: inventoryNumber вместо inventory
-            location = "Lab-2 bench"
-        ).id  // добавлено .id, так как add возвращает Instrument
+            inventoryNumber = "INV-001",
+            location = "Lab-1"
+        )
+        instrumentId = instrument.id
         calibrationService = CalibrationService(instrumentService)
     }
 
     @Test
-    fun addCalibration_invalidType_throwsException() {
-        val invalidType = "INVALID_TYPE" // используем действительно невалидный тип
+    fun `add - should add calibration`() {
+        val calibration = calibrationService.add(
+            instrumentId = instrumentId,
+            typeInput = "ONE_POINT",
+            resultInput = "OK",
+            comment = "Test comment"
+        )
 
-        val exception = assertThrows<IllegalArgumentException> {
-            calibrationService.add(
-                instrumentId = instrumentId,
-                typeInput = invalidType,
-                resultInput = CalibrationResult.OK.name,  // resultInput ожидает строку
-                comment = "Test comment"
-            )
+        assertNotNull(calibration)
+        assertEquals(instrumentId, calibration.instrumentId)
+        assertEquals(CalibrationType.ONE_POINT, calibration.type)
+        assertEquals(CalibrationResult.OK, calibration.result)
+        assertEquals("Test comment", calibration.comment)
+    }
+
+    @Test
+    fun `add - should handle empty comment`() {
+        val calibration = calibrationService.add(
+            instrumentId = instrumentId,
+            typeInput = "TWO_POINT",
+            resultInput = "FAIL",
+            comment = null
+        )
+
+        assertNotNull(calibration)
+        assertEquals("", calibration.comment)
+    }
+
+    @Test
+    fun `add - should throw exception for non-existent instrument`() {
+        assertThrows<IllegalArgumentException> {
+            calibrationService.add(99999, "ONE_POINT", "OK")
         }
+    }
 
-        assert(exception.message!!.contains("Invalid calibration type"))
+    @Test
+    fun `listByInstrument - should return calibrations`() {
+        calibrationService.add(instrumentId, "ONE_POINT", "OK")
+        calibrationService.add(instrumentId, "TWO_POINT", "FAIL")
+
+        val list = calibrationService.listByInstrument(instrumentId)
+
+        assertEquals(2, list.size)
+    }
+
+    @Test
+    fun `listByInstrument - should return last N calibrations`() {
+        calibrationService.add(instrumentId, "ONE_POINT", "OK")
+        calibrationService.add(instrumentId, "TWO_POINT", "FAIL")
+        calibrationService.add(instrumentId, "ONE_POINT", "OK")
+
+        val last2 = calibrationService.listByInstrument(instrumentId, 2)
+
+        assertEquals(2, last2.size)
     }
 }
