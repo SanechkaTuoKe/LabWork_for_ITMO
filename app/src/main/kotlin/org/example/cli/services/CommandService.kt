@@ -40,11 +40,14 @@ class CommandService {
             return true
         }
 
-        return try {
-            handler.handle(params, instrumentService, commands.values)
-        } catch (e: Exception) {
-            ErrorHandler.handle(e)
-            true
+    var result: Boolean         
+    try {
+        result = handler.handle(...)   
+    } catch (e: Exception) {          
+        ErrorHandler.handle(e)        
+        result = true                  
+    }
+    return result     
         }
     }
 }
