@@ -125,4 +125,63 @@ class InstrumentServiceTest {
 
         assertTrue(service.exists(instrument.id))
     }
+    // !11!11 Добавлены тесты, теперь при любом вызове метода add() даже не при интерактивном вводе объект будет проходить валидацию также с апдейт()
+
+    @Test
+    fun `add - should throw exception for blank name`() {
+        assertThrows<IllegalArgumentException> {
+            service.add(
+                name = "",
+                type = InstrumentType.PH_METER,
+                inventoryNumber = "INV-001",
+                location = "Lab-1"
+            )
+        }
+    }
+
+    @Test
+    fun `add - should throw exception for blank location`() {
+        assertThrows<IllegalArgumentException> {
+            service.add(
+                name = "Valid Name",
+                type = InstrumentType.PH_METER,
+                inventoryNumber = "INV-001",
+                location = "   "
+            )
+        }
+    }
+
+    @Test
+    fun `add - should throw exception for invalid inventory number`() {
+        assertThrows<IllegalArgumentException> {
+            service.add(
+                name = "Valid Name",
+                type = InstrumentType.PH_METER,
+                inventoryNumber = "",
+                location = "Lab-1"
+            )
+        }
+    }
+
+    @Test
+    fun `add - should accept null inventory number`() {
+        val instrument = service.add(
+            name = "Valid Name",
+            type = InstrumentType.PH_METER,
+            inventoryNumber = null,
+            location = "Lab-1"
+        )
+        assertNotNull(instrument)
+        assertNull(instrument.inventoryNumber)
+    }
+    fun `update - should throw exception for invalid name`() {
+        val instrument = service.add("Old Name", InstrumentType.PH_METER, null, "Lab")
+
+        assertThrows<IllegalArgumentException> {
+            service.update(
+                id = instrument.id,
+                name = ""  //невалидное имя при обновлении
+            )
+        }
+    }
 }

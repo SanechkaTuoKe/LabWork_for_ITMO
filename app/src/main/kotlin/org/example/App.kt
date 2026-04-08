@@ -1,9 +1,20 @@
 package org.example
 
-import org.example.cli.services.LoopService
+import LoopService
 
 
-fun main(){
+fun main(args: Array<String>) {
     println("type help for help")
-    LoopService().loopOfCommands()
+
+    val loopService = LoopService()
+
+    //возможность указать путь при запуске
+    if (args.isNotEmpty()) {
+        val path = args[0]
+        println("Your path?: $path")
+        loopService.loadInitialData(path)
+    }
+
+    loopService.loopOfCommands()
 }
+
