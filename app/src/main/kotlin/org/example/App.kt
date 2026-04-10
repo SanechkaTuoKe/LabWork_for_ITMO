@@ -2,26 +2,33 @@ package org.example
 
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import org.example.service.InstrumentService
-import org.example.ui.instruments.InstrumentController
-import org.example.ui.instruments.InstrumentView
+import androidx.compose.ui.window.rememberWindowState
+import org.example.cli.services.CommandService
 import org.example.ui.theme.AppTheme
+import androidx.compose.ui.unit.dp
+import org.example.ui.MainView
 
-fun main() {
+fun main(args: Array<String>) {
+    println("Starting Equipment Manager...")
+
+    val commandService = CommandService()
+
+    if (args.isNotEmpty()) {
+        try {
+            commandService.loadStartupData(args[0])
+            println("Loaded from: ${args[0]}")
+        } catch (e: Exception) {
+            println("Error: ${e.message}")
+        }
+    }
 
     application {
-
-        val service = InstrumentService()
-        val controller = InstrumentController(service)
-
         Window(
             onCloseRequest = ::exitApplication,
-            title = "Instruments"
+            title = "Equipment Manager",
+            state = rememberWindowState(width = 1100.dp, height = 700.dp)
         ) {
-
-            AppTheme {
-                InstrumentView(controller)
-            }
+            MainView(commandService = commandService)
         }
     }
 }

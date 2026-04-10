@@ -61,8 +61,4 @@ class CommandService {
             println("Command not found")
             true
         }
-    }
-
-    fun loopOfCommands() {
-    }
-}
+    }}

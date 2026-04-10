@@ -56,7 +56,6 @@ class CalibrationService(
         require(instrumentService.getById(instrumentId) != null) {
             "Instrument with id=$instrumentId not found"
         }
-val Abcd = ::getById
         val list: List<Calibration> = calibrations.values
             .asSequence()
             .filter(fun(it: Calibration): Boolean {
