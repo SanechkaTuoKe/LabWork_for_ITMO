@@ -6,7 +6,7 @@ import org.example.storage.*
 
 class CommandService {
 
-    private val instrumentService = InstrumentService()
+    internal val instrumentService = InstrumentService()
     private val calibrationService = CalibrationService(instrumentService)
     private val maintenanceService = MaintenanceService(instrumentService)
     private val storageService = StorageService(FileStorage(), FileValidator())

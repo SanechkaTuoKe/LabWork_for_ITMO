@@ -1,47 +1,25 @@
 plugins {
-    // Kotlin JVM plugin
-    kotlin("jvm") version "2.2.21"
-
-    // Application plugin для запуска main()
-    application
+    kotlin("jvm") version "2.0.21"
+    kotlin("plugin.compose") version "2.0.21"
+    id("org.jetbrains.compose") version "1.7.0"
 }
 
 repositories {
-    // Репозиторий для зависимостей
     mavenCentral()
+    google()
+    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
 }
 
 dependencies {
-    // Kotlin Test
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    implementation(compose.desktop.currentOs)
+    implementation(compose.material3)
 
-    // JUnit 5
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.11.2")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
-    // Пример внешней библиотеки
-    implementation("com.google.guava:guava:32.1.2-jre")
+    testImplementation(kotlin("test"))
 }
 
-// Настройка Java Toolchain
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
+// Настройки запуска (без сложных нативных дистрибутивов)
+compose.desktop {
+    application {
+        mainClass = "org.example.MainKt"
     }
-}
-
-// Настройка точки входа для приложения
-application {
-    // Имя класса для функции main()
-    mainClass.set("org.example.AppKt")
-}
-
-// Используем JUnit Platform для тестов
-tasks.named<Test>("test") {
-    useJUnitPlatform()
-}
-
-// Включаем стандартный ввод для gradle run
-tasks.named<JavaExec>("run") {
-    standardInput = System.`in`
 }

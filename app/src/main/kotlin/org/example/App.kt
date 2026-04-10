@@ -1,20 +1,27 @@
 package org.example
 
-import LoopService
+import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.application
+import org.example.service.InstrumentService
+import org.example.ui.instruments.InstrumentController
+import org.example.ui.instruments.InstrumentView
+import org.example.ui.theme.AppTheme
 
+fun main() {
 
-fun main(args: Array<String>) {
-    println("type help for help")
+    application {
 
-    val loopService = LoopService()
+        val service = InstrumentService()
+        val controller = InstrumentController(service)
 
-    //возможность указать путь при запуске
-    if (args.isNotEmpty()) {
-        val path = args[0]
-        println("Your path?: $path")
-        loopService.loadInitialData(path)
+        Window(
+            onCloseRequest = ::exitApplication,
+            title = "Instruments"
+        ) {
+
+            AppTheme {
+                InstrumentView(controller)
+            }
+        }
     }
-
-    loopService.loopOfCommands()
 }
-

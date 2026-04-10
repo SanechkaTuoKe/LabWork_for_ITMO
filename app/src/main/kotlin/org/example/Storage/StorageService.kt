@@ -85,7 +85,7 @@ class StorageService(
         )
     }
 
-    // Исправлено: добавлен перенос строки
+    //перенос строки
     fun attachCollections(
         instrs: TreeMap<Long, Instrument>,
         cals: TreeMap<Long, Calibration>,
