@@ -4,26 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="854374bb-eed7-42f4-a74d-ca8fcde7fecf" name="Changes" comment="этап 4, можно добавлять и удалять объекты, сделана цветная светлая тема">
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/Instruments/Dialog/AddInstrumentDialog.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/Instruments/Dialog/CalibrationDialog.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/Instruments/Dialog/EditInstrumentDialog.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/Instruments/Dialog/InstrumentUpdateDialog.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/Instruments/Dialog/MaintenanceDialog.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/Instruments/InstrumentDetailView.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/Instruments/InstrumentMasterView.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/components/EmptyState.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/components/ErrorDialog.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/components/LoadingIndicator.kt" afterDir="false" />
+    <list default="true" id="854374bb-eed7-42f4-a74d-ca8fcde7fecf" name="Changes" comment="ЭТАП 4: можно изменять, добавлять инструменты, добавить калибровку и работу над инструментом, можно удалить">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/App.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/App.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/Storage/StorageService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/Storage/StorageService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/Instruments/InstrumentController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/Instruments/InstrumentController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/Instruments/InstrumentView.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/MainView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/MainView.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/services/CommandService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/services/CommandService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/CalibrationService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/CalibrationService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/MaintenanceService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/MaintenanceService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/services/LoopService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/services/LoopService.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +55,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="step-4-only" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -99,24 +83,24 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Load Gradle Dependencies.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PuTao:app [:app:org.example.AppKt.main()].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;step-4-only&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Projects/PuTao&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Load Gradle Dependencies.executor": "Run",
+    "Gradle.PuTao:app [:app:org.example.AppKt.main()].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "step-4-only",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/User/Projects/PuTao",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="K2MoveDeclarationsDialog.RECENT_PACKAGE_KEY">
       <recent name="org.example.UI.Instruments.Dialog" />
@@ -227,7 +211,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775812849756</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="ЭТАП 4: можно изменять, добавлять инструменты, добавить калибровку и работу над инструментом, можно удалить">
+      <option name="closed" value="true" />
+      <created>1775838616408</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1775838616408</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -248,7 +240,8 @@
     <MESSAGE value="для апдейта калибровки" />
     <MESSAGE value="названия по методичке, добавлен эррхендлер" />
     <MESSAGE value="этап 4, можно добавлять и удалять объекты, сделана цветная светлая тема" />
-    <option name="LAST_COMMIT_MESSAGE" value="этап 4, можно добавлять и удалять объекты, сделана цветная светлая тема" />
+    <MESSAGE value="ЭТАП 4: можно изменять, добавлять инструменты, добавить калибровку и работу над инструментом, можно удалить" />
+    <option name="LAST_COMMIT_MESSAGE" value="ЭТАП 4: можно изменять, добавлять инструменты, добавить калибровку и работу над инструментом, можно удалить" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

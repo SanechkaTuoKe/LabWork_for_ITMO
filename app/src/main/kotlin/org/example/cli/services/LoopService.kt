@@ -1,17 +1,13 @@
-import org.example.cli.services.CommandService
-import org.example.cli.services.ReaderService
+package org.example.cli.services
 
-class LoopService {
-
+class LoopService(
+    private val commandService: CommandService
+) {
     private val readerService = ReaderService()
-    private val commandService = CommandService()
-
-    fun loadInitialData(path: String) {
-        commandService.loadStartupData(path)
-    }
 
     fun loopOfCommands() {
         while (true) {
+            print("> ")
             val input = readerService.readCommand()
             val shouldContinue = commandService.execute(input)
 
