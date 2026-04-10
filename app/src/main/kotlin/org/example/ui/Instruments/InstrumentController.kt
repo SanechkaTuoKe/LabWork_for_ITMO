@@ -11,7 +11,6 @@ class InstrumentController(
     val calibrationService: CalibrationService,
     val maintenanceService: MaintenanceService
 ) {
-
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     var instruments = mutableStateOf(listOf<Instrument>())
@@ -19,6 +18,9 @@ class InstrumentController(
     var isLoading = mutableStateOf(false)
     var error = mutableStateOf<String?>(null)
     var status = mutableStateOf("Ready")
+
+    var calibrationUpdateCounter = mutableStateOf(0)
+    var maintenanceUpdateCounter = mutableStateOf(0)
 
     fun refresh() {
         scope.launch {
@@ -38,6 +40,8 @@ class InstrumentController(
         selected.value = inst
     }
 
+    // ============ ОСНОВНЫЕ МЕТОДЫ ДЛЯ РАБОТЫ С ПРИБОРАМИ ============
+
     fun add(name: String, type: InstrumentType, location: String, inventory: String?) {
         scope.launch {
             try {
@@ -49,10 +53,17 @@ class InstrumentController(
         }
     }
 
-    fun edit(id: Long, name: String, type: InstrumentType, location: String, inventory: String?) {
+    fun edit(id: Long, name: String, location: String, inventory: String?) {
         scope.launch {
             try {
                 instrumentService.update(id, name, location, inventory)
+                val currentSelected = selected.value
+                if (currentSelected != null && currentSelected.id == id) {
+                    val updated = instrumentService.getById(id)
+                    if (updated != null) {
+                        selected.value = updated
+                    }
+                }
                 refresh()
             } catch (e: Exception) {
                 error.value = e.message
@@ -64,13 +75,17 @@ class InstrumentController(
         scope.launch {
             try {
                 instrumentService.delete(id)
-                selected.value = null
+                if (selected.value?.id == id) {
+                    selected.value = null
+                }
                 refresh()
             } catch (e: Exception) {
                 error.value = e.message
             }
         }
     }
+
+    // ============ МЕТОДЫ ДЛЯ КАЛИБРОВОК ============
 
     fun addCalibration(
         id: Long,
@@ -89,12 +104,15 @@ class InstrumentController(
                     ownerUsername = "SYSTEM",
                     calibratedAt = date
                 )
+                calibrationUpdateCounter.value++
                 refresh()
             } catch (e: Exception) {
                 error.value = e.message
             }
         }
     }
+
+    // ============ МЕТОДЫ ДЛЯ ОБСЛУЖИВАНИЙ ============
 
     fun addMaintenance(
         id: Long,
@@ -111,6 +129,7 @@ class InstrumentController(
                     ownerUsername = "SYSTEM",
                     doneAt = date
                 )
+                maintenanceUpdateCounter.value++
                 refresh()
             } catch (e: Exception) {
                 error.value = e.message

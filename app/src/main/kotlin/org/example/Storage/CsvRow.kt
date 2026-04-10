@@ -10,5 +10,7 @@ data class CsvRow(
             return ""
         }
     }
-    fun size(): Int = fields.size
+    fun size(): Int {
+        return fields.size
+    }
 }
