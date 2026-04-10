@@ -1,4 +1,4 @@
-package org.example.ui.instruments
+package org.example.ui.Instruments
 
 import androidx.compose.runtime.mutableStateOf
 import kotlinx.coroutines.*
@@ -39,8 +39,6 @@ class InstrumentController(
     fun select(inst: Instrument) {
         selected.value = inst
     }
-
-    // ============ ОСНОВНЫЕ МЕТОДЫ ДЛЯ РАБОТЫ С ПРИБОРАМИ ============
 
     fun add(name: String, type: InstrumentType, location: String, inventory: String?) {
         scope.launch {
@@ -85,8 +83,6 @@ class InstrumentController(
         }
     }
 
-    // ============ МЕТОДЫ ДЛЯ КАЛИБРОВОК ============
-
     fun addCalibration(
         id: Long,
         type: String,
@@ -111,8 +107,6 @@ class InstrumentController(
             }
         }
     }
-
-    // ============ МЕТОДЫ ДЛЯ ОБСЛУЖИВАНИЙ ============
 
     fun addMaintenance(
         id: Long,

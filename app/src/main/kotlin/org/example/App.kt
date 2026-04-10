@@ -6,8 +6,8 @@ import androidx.compose.ui.window.rememberWindowState
 import androidx.compose.ui.unit.dp
 import org.example.cli.services.CommandService
 import org.example.cli.services.LoopService
-import org.example.ui.MainView
-import org.example.ui.theme.AppTheme
+import org.example.ui.MainScreen
+import org.example.ui.theme.EquipmentAppTheme
 import kotlin.concurrent.thread
 
 fun main(args: Array<String>) {
@@ -40,8 +40,8 @@ fun main(args: Array<String>) {
             title = "Equipment Manager",
             state = rememberWindowState(width = 1100.dp, height = 700.dp)
         ) {
-            AppTheme {
-                MainView(commandService = commandService)
+            EquipmentAppTheme {
+                MainScreen(commandService = commandService)
             }
         }
     }

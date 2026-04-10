@@ -1,14 +1,16 @@
-package org.example.ui.instruments
+package org.example.ui.Instruments
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.*
+import androidx.compose.ui.Modifier
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import org.example.domain.Instrument
+import androidx.compose.ui.unit.dp
 import org.example.domain.Calibration
+import org.example.domain.Instrument
 import org.example.domain.Maintenance
+
 
 @Composable
 fun InstrumentDetailView(
@@ -20,10 +22,10 @@ fun InstrumentDetailView(
     onCalibrate: () -> Unit,
     onMaintain: () -> Unit
 ) {
-    Column {
+    Column(modifier = Modifier.padding(8.dp)) {
         if (selected != null) {
             Text("DETAILS", style = MaterialTheme.typography.titleMedium)
-            Text("") // пустая строка вместо отступа
+            Text("")
             Text("ID: ${selected.id}")
             Text("Name: ${selected.name}")
             Text("Type: ${selected.type}")
@@ -36,26 +38,25 @@ fun InstrumentDetailView(
                 Text("Inventory: ${selected.inventoryNumber}")
             }
 
-            Text("") // пустая строка
+            Text("")
 
-            Row {
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 Button(onClick = onEdit) { Text("Edit") }
                 Button(onClick = onCalibrate) { Text("Calibration") }
                 Button(onClick = onMaintain) { Text("Maintenance") }
                 Button(onClick = onDelete) { Text("Delete") }
             }
 
-            Text("") // пустая строка
+            Text("")
 
-            // Список калибровок
             Text("Calibrations:", style = MaterialTheme.typography.titleSmall)
             if (calibrations.isEmpty()) {
                 Text("No calibrations")
             } else {
-                LazyColumn {
+                LazyColumn(modifier = Modifier.heightIn(max = 150.dp)) {
                     items(calibrations) { cal ->
-                        Card {
-                            Column {
+                        Card(modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp)) {
+                            Column(modifier = Modifier.padding(4.dp)) {
                                 Text("${cal.type}: ${cal.result} at ${cal.calibratedAt}")
                                 cal.comment?.let { Text("Comment: $it") }
                             }
@@ -64,17 +65,16 @@ fun InstrumentDetailView(
                 }
             }
 
-            Text("") // пустая строка
+            Text("")
 
-            // Список обслуживаний
             Text("Maintenances:", style = MaterialTheme.typography.titleSmall)
             if (maintenances.isEmpty()) {
                 Text("No maintenances")
             } else {
-                LazyColumn {
+                LazyColumn(modifier = Modifier.heightIn(max = 150.dp)) {
                     items(maintenances) { maint ->
-                        Card {
-                            Column {
+                        Card(modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp)) {
+                            Column(modifier = Modifier.padding(4.dp)) {
                                 Text("${maint.type} at ${maint.doneAt}")
                                 Text(maint.details)
                             }

@@ -6,21 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="854374bb-eed7-42f4-a74d-ca8fcde7fecf" name="Changes" comment="упрощена часть сохранения">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/Storage/CsvRow.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/Storage/CsvRow.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/Storage/FileStorage.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/Storage/FileStorage.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/Instruments/Dialog/AddInstrumentDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/Dialog/AddInstrumentDialog.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/Instruments/Dialog/CalibrationDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/Dialog/CalibrationDialog.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/Instruments/Dialog/EditInstrumentDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/Dialog/EditInstrumentDialog.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/Instruments/Dialog/InstrumentUpdateDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/Dialog/InstrumentUpdateDialog.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/Instruments/Dialog/MaintenanceDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/Dialog/MaintenanceDialog.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/Instruments/InstrumentController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/InstrumentController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/Instruments/InstrumentDetailView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/InstrumentDetailView.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/Instruments/InstrumentMasterView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/InstrumentMasterView.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/MainView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/MainView.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/components/EmptyState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/components/EmptyState.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/components/ErrorDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/components/ErrorDialog.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/components/LoadingIndicator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/components/LoadingIndicator.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/UI/theme/Theme.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/theme/Theme.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/App.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/App.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/Dialog/AddInstrumentDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/dialogs/AddInstrumentDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/Dialog/CalibrationDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/dialogs/CalibrationDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/Dialog/EditInstrumentDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/dialogs/EditInstrumentDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/Dialog/InstrumentUpdateDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/dialogs/InstrumentUpdateDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/Dialog/MaintenanceDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/dialogs/MaintenanceDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/InstrumentController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/InstrumentController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/InstrumentDetailView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/InstrumentDetailView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/InstrumentMasterView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/Instruments/InstrumentMasterView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/MainView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/MainView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/theme/Theme.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/theme/AppTheme.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,6 +117,20 @@
       <recent name="org.example.CLI.service" />
       <recent name="org.example.CLI.handlers" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="AppKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.AppKt" />
+      <module name="PuTao.app.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Kotlin.AppKt" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

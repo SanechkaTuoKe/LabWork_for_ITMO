@@ -13,7 +13,7 @@ private val PinkColorScheme = lightColorScheme(
 )
 
 @Composable
-fun AppTheme(content: @Composable () -> Unit) {
+fun EquipmentAppTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         colorScheme = PinkColorScheme,
         typography = Typography(),

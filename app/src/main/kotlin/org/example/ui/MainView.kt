@@ -1,31 +1,27 @@
 package org.example.ui
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-
 import org.example.cli.services.CommandService
 import org.example.service.CalibrationService
 import org.example.service.MaintenanceService
-
 import org.example.ui.components.ErrorDialog
 import org.example.ui.components.LoadingIndicator
-
-import org.example.ui.instruments.InstrumentController
-import org.example.ui.instruments.InstrumentDetailView
-import org.example.ui.instruments.InstrumentMasterView
-
-import org.example.ui.instruments.dialogs.AddInstrumentDialog
-import org.example.ui.instruments.dialogs.CalibrationDialog
-import org.example.ui.instruments.dialogs.EditInstrumentDialog
-import org.example.ui.instruments.dialogs.MaintenanceDialog
-
-import org.example.ui.theme.AppTheme
+import org.example.ui.Instruments.InstrumentController
+import org.example.ui.Instruments.InstrumentDetailView
+import org.example.ui.Instruments.InstrumentMasterView
+import org.example.ui.Instruments.dialogs.AddInstrumentDialog
+import org.example.ui.Instruments.dialogs.CalibrationDialog
+import org.example.ui.Instruments.dialogs.EditInstrumentDialog
+import org.example.ui.Instruments.dialogs.MaintenanceDialog
+import org.example.ui.theme.EquipmentAppTheme
 
 @Composable
-fun MainView(commandService: CommandService) {
+fun MainScreen(commandService: CommandService) {
     val controller = remember {
         val instService = commandService.instrumentService
         InstrumentController(
@@ -40,7 +36,7 @@ fun MainView(commandService: CommandService) {
     var showCal by remember { mutableStateOf(false) }
     var showMaint by remember { mutableStateOf(false) }
 
-    AppTheme {
+    EquipmentAppTheme {
         Box(modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize()) {
                 Row(
