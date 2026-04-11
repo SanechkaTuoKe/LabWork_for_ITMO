@@ -11,13 +11,13 @@ import org.example.service.CalibrationService
 import org.example.service.MaintenanceService
 import org.example.ui.components.ErrorDialog
 import org.example.ui.components.LoadingIndicator
-import org.example.ui.Instruments.InstrumentController
-import org.example.ui.Instruments.InstrumentDetailView
-import org.example.ui.Instruments.InstrumentMasterView
-import org.example.ui.Instruments.dialogs.AddInstrumentDialog
-import org.example.ui.Instruments.dialogs.CalibrationDialog
-import org.example.ui.Instruments.dialogs.EditInstrumentDialog
-import org.example.ui.Instruments.dialogs.MaintenanceDialog
+import org.example.ui.instruments.InstrumentController
+import org.example.ui.instruments.InstrumentDetailView
+import org.example.ui.instruments.InstrumentMasterView
+import org.example.ui.instruments.dialogs.AddInstrumentDialog
+import org.example.ui.instruments.dialogs.CalibrationDialog
+import org.example.ui.instruments.dialogs.EditInstrumentDialog
+import org.example.ui.instruments.dialogs.MaintenanceDialog
 import org.example.ui.theme.EquipmentAppTheme
 
 @Composable
@@ -44,6 +44,11 @@ fun MainScreen(commandService: CommandService) {
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+                    Button(
+                        onClick = {showAdd = true},
+                        modifier = Modifier.fillMaxSize()
+                    )
+                        { Text("sd") }
                     Button(
                         onClick = { controller.refresh() },
                         enabled = !controller.isLoading.value

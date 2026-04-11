@@ -11,11 +11,11 @@ class FileStorage {
 
     fun saveAll(
         folderPath: String,
-        instruments: TreeMap<Long, Instrument>,
+        instruments: TreeMap<Long, Instrument>, //интерфейс для загрузок - сохранений, на одну коллекцию по классу
         calibrations: TreeMap<Long, Calibration>,
         maintenances: TreeMap<Long, Maintenance>
     ) {
-        val folder = Paths.get(folderPath)
+        val folder = Paths.get(folderPath) //рекомендуют убрать гет?
         if (!Files.exists(folder)) {Files.createDirectories(folder) }
         saveInstruments(folder.resolve("instruments.csv"), instruments)
         saveCalibrations(folder.resolve("calibrations.csv"), calibrations)
@@ -23,7 +23,8 @@ class FileStorage {
     }
 
     private fun saveInstruments(path: Path, map: TreeMap<Long, Instrument>) {
-        writeCsv(path, "id,name,type,inventory,location,status,owner,createdAt,updatedAt") { writer ->
+        writeCsv(path, "id,name,type,inventory,location,status,owner,createdAt,updatedAt")
+        { writer ->
             map.values.forEach { instr ->
                 writer.write("${instr.id},${escape(instr.name)},${instr.type.name},${escape(instr.inventoryNumber ?: "")},${escape(instr.location)},${instr.status.name},${escape(instr.ownerUsername)},${instr.createdAt},${instr.updatedAt}\n")
             }

@@ -1,4 +1,4 @@
-package org.example.ui.Instruments
+package org.example.ui.instruments
 
 import androidx.compose.runtime.mutableStateOf
 import kotlinx.coroutines.*
@@ -25,13 +25,12 @@ class InstrumentController(
     fun refresh() {
         scope.launch {
             isLoading.value = true
-            try {
-                val list = instrumentService.getAll()
-                instruments.value = list
-                status.value = "Loaded: ${list.size}"
-            } catch (e: Exception) {
-                error.value = e.message
-            }
+            val list = instrumentService.getAll()
+            instruments.value = list
+
+            calibrationUpdateCounter.value++
+            maintenanceUpdateCounter.value++
+
             isLoading.value = false
         }
     }

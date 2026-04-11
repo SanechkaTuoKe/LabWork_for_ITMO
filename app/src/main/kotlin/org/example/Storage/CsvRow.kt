@@ -10,7 +10,5 @@ data class CsvRow(
             return ""
         }
     }
-    fun size(): Int {
-        return fields.size
-    }
+    val size: Int get() = fields.size
 }

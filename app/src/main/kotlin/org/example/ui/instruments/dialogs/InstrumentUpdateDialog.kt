@@ -1,4 +1,4 @@
-package org.example.ui.Instruments.dialog
+package org.example.ui.instruments.dialog
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.*

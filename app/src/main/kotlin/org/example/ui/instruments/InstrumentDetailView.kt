@@ -1,4 +1,4 @@
-package org.example.ui.Instruments
+package org.example.ui.instruments
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.ui.Modifier

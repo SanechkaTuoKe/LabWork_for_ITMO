@@ -8,7 +8,7 @@ private val PinkColorScheme = lightColorScheme(
     primary = Color(0xFFE91E63),
     secondary = Color(0xFFF48FB1),
     tertiary = Color(0xFFFCE4EC),
-    background = Color(0xFFFFF0F5),
+    background = Color(0xFF72213C),
     surface = Color(0xFFFFF0F5)
 )
 

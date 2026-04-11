@@ -28,7 +28,7 @@ class FileValidator {
         val seen = mutableSetOf<Long>()
 
         for (row in rows) {
-            if (row.size() != 9) {
+            if (row.size != 9) {
                 errors.add("Instrument: wrong number of fields")
                 continue
             }
@@ -68,7 +68,7 @@ class FileValidator {
         errors: MutableList<String>
     ) {
         for (row in rows) {
-            if (row.size() != 5) {
+            if (row.size != 5) {
                 errors.add("Calibration: wrong fields")
                 continue
             }
@@ -90,7 +90,7 @@ class FileValidator {
         errors: MutableList<String>
     ) {
         for (row in rows) {
-            if (row.size() != 5) {
+            if (row.size != 5) {
                 errors.add("Maintenance: wrong fields")
                 continue
             }

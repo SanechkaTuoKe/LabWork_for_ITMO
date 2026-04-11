@@ -13,6 +13,9 @@ import kotlin.concurrent.thread
 fun main(args: Array<String>) {
     println("Starting Equipment Manager...")
     val commandService = CommandService()
+    val instrumentService = commandService.instrumentService
+    val calibrationService = commandService.calibrationService
+    val maintenanceService = commandService.maintenanceService
 
     if (args.isNotEmpty()) {
         try {
