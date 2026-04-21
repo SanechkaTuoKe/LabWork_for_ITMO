@@ -44,11 +44,7 @@ fun MainScreen(commandService: CommandService) {
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Button(
-                        onClick = {showAdd = true},
-                        modifier = Modifier.fillMaxSize()
-                    )
-                        { Text("sd") }
+
                     Button(
                         onClick = { controller.refresh() },
                         enabled = !controller.isLoading.value
@@ -119,6 +115,11 @@ fun MainScreen(commandService: CommandService) {
                         onMaintain = { showMaint = true }
                     )
                 }
+                Button(
+                    onClick = {showAdd = true},
+                    modifier = Modifier.fillMaxWidth()
+                )
+                { Text("sd") }
             }
 
             if (controller.error.value != null) {

@@ -20,6 +20,15 @@ dependencies {
 // Настройки запуска (без сложных нативных дистрибутивов)
 compose.desktop {
     application {
-        mainClass = "org.example.MainKt"
+        mainClass = "org.example.AppKt"
     }
 }
+//tasks.jar {
+//    manifest {
+//        attributes["Main-Class"] = "org.example.AppKt"
+//    }
+//}
+
+//tasks.named<JavaExec>("run") {
+//    standardInput = System.`in`
+//}
