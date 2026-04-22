@@ -1,6 +1,7 @@
 package org.example.ui.instruments.dialogs
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.unit.dp
@@ -11,43 +12,36 @@ fun MaintenanceDialog(
     onConfirm: (MaintenanceType, String) -> Unit,
     onDismiss: () -> Unit
 ) {
-
-    var type by remember { mutableStateOf(MaintenanceType.SERVICE) }
+    var type by remember { mutableStateOf<MaintenanceType?>(null) }
     var details by remember { mutableStateOf("") }
+    var typeExpanded by remember { mutableStateOf(false) }
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Add Maintenance") },
+        shape = RoundedCornerShape(0.dp),
+        title = { Text("Add Maintenance", style = MaterialTheme.typography.titleMedium) },
         text = {
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-
-                OutlinedTextField(
-                    value = type.name,
-                    onValueChange = { },
-                    label = { Text("Type (SERVICE/REPAIR)") },
-                    enabled = false
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                AppDropdown(
+                    label = "Type",
+                    selected = type?.name,
+                    options = MaintenanceType.values().map { it.name },
+                    expanded = typeExpanded,
+                    onExpandedChange = { typeExpanded = it },
+                    onSelect = { idx -> type = MaintenanceType.values()[idx]; typeExpanded = false }
                 )
-
-                OutlinedTextField(
-                    value = details,
-                    onValueChange = { details = it },
-                    label = { Text("Details") }
-                )
+                AppTextField(value = details, onValueChange = { details = it }, label = "Details")
             }
         },
         confirmButton = {
-            Button(onClick = {
-                if (details.isNotBlank()) {
-                    onConfirm(type, details)
-                }
-            }) {
-                Text("Add")
-            }
+            Button(
+                onClick = { onConfirm(type!!, details) },
+                enabled = type != null && details.isNotBlank(),
+                shape = RoundedCornerShape(0.dp)
+            ) { Text("Add") }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) {
-                Text("Cancel")
-            }
+            TextButton(onClick = onDismiss, shape = RoundedCornerShape(0.dp)) { Text("Cancel") }
         }
     )
 }

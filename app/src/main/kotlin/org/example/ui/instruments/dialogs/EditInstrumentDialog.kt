@@ -1,6 +1,7 @@
 package org.example.ui.instruments.dialogs
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.unit.dp
@@ -19,47 +20,26 @@ fun EditInstrumentDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Edit Instrument") },
+        shape = RoundedCornerShape(0.dp),
+        title = { Text("Edit Instrument", style = MaterialTheme.typography.titleMedium) },
         text = {
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                OutlinedTextField(
-                    value = name,
-                    onValueChange = { name = it },
-                    label = { Text("Name") }
-                )
-
-                OutlinedTextField(
-                    value = instrument.type.name,
-                    onValueChange = {},
-                    label = { Text("Type") },
-                    enabled = false
-                )
-
-                OutlinedTextField(
-                    value = location,
-                    onValueChange = { location = it },
-                    label = { Text("Location") }
-                )
-
-                OutlinedTextField(
-                    value = inventory,
-                    onValueChange = { inventory = it },
-                    label = { Text("Inventory (optional)") }
-                )
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                AppTextField(value = name, onValueChange = { name = it }, label = "Name")
+                // Тип не меняется при редактировании
+                AppTextField(value = instrument.type.name.replace("_", " "), onValueChange = {}, label = "Type", enabled = false)
+                AppTextField(value = location, onValueChange = { location = it }, label = "Location")
+                AppTextField(value = inventory, onValueChange = { inventory = it }, label = "Inventory number (optional)")
             }
         },
         confirmButton = {
             Button(
-                onClick = {
-                    onConfirm(name, instrument.type, location, inventory.ifBlank { null })
-                },
-                enabled = name.isNotBlank() && location.isNotBlank()
-            ) {
-                Text("Save")
-            }
+                onClick = { onConfirm(name, instrument.type, location, inventory.ifBlank { null }) },
+                enabled = name.isNotBlank() && location.isNotBlank(),
+                shape = RoundedCornerShape(0.dp)
+            ) { Text("Save") }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("Cancel") }
+            TextButton(onClick = onDismiss, shape = RoundedCornerShape(0.dp)) { Text("Cancel") }
         }
     )
 }

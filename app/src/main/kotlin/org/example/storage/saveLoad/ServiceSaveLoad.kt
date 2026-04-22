@@ -13,12 +13,18 @@ class ServiceSaveLoad<T, ID : Any>(
 ) : SaveLoad<T, ID> {
 
     override fun save(entities: Collection<T>) {
+        filePath.parent?.let { Files.createDirectories(it) }
         Files.newBufferedWriter(filePath, StandardCharsets.UTF_8).use { writer ->
             writer.write(headers.joinToString(","))
             writer.newLine()
             entities.forEach { entity ->
                 val data = toMap(entity)
-                writer.write(headers.joinToString(",") { data[it] ?: "" })
+                writer.write(headers.joinToString(",") { key ->
+                    val value = data[key] ?: ""
+                    if (value.contains(',') || value.contains('"') || value.contains('\n')) {
+                        "\"${value.replace("\"", "\"\"")}\""
+                    } else value
+                })
                 writer.newLine()
             }
         }
@@ -29,21 +35,36 @@ class ServiceSaveLoad<T, ID : Any>(
         val lines = Files.readAllLines(filePath, StandardCharsets.UTF_8)
         if (lines.size < 2) return emptyMap()
 
-        val colIndex = lines[0].split(",").map { it.trim() }
+        val colIndex = parseCsvLine(lines[0]).map { it.trim() }
             .withIndex().associate { it.value to it.index }
 
         return lines.drop(1)
             .filter { it.isNotBlank() }
             .mapNotNull { line ->
-                val parts = line.split(",")
+                val parts = parseCsvLine(line)
                 val rowData = headers.associateWith { h ->
                     val idx = colIndex[h] ?: return@associateWith null
                     parts.getOrNull(idx)?.trim()
                 }
-                val entity = fromMap(rowData)
+                val entity = fromMap(rowData as Map<String, String>)
                 entity?.let { extractId(it) to it }
             }.toMap()
     }
 
     override fun exists(): Boolean = Files.exists(filePath)
+
+    private fun parseCsvLine(line: String): List<String> {
+        val result = mutableListOf<String>()
+        var inQuotes = false
+        val current = StringBuilder()
+        for (ch in line) {
+            when {
+                ch == '"' -> inQuotes = !inQuotes
+                ch == ',' && !inQuotes -> { result.add(current.toString()); current.clear() }
+                else -> current.append(ch)
+            }
+        }
+        result.add(current.toString())
+        return result
+    }
 }

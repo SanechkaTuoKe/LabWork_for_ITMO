@@ -6,12 +6,10 @@ import java.nio.file.Path
 import java.time.Instant
 
 object MaintenanceSaveLoad {
-
     fun create(filePath: Path): SaveLoad<Maintenance, Long> {
         return ServiceSaveLoad(
             filePath = filePath,
-            headers = listOf("id", "instrumentId", "type", "details", "doneAt", "createdAt"),
-
+            headers = listOf("id", "instrumentId", "type", "details", "doneAt", "ownerUsername", "createdAt"),
             toMap = { m ->
                 mapOf(
                     "id" to m.id.toString(),
@@ -19,17 +17,18 @@ object MaintenanceSaveLoad {
                     "type" to m.type.name,
                     "details" to m.details,
                     "doneAt" to m.doneAt.toString(),
-                    "createdAt" to m.createdAt.toString(),
-                    "ownerUsername" to m.ownerUsername
+                    "ownerUsername" to m.ownerUsername,
+                    "createdAt" to m.createdAt.toString()
                 )
             },
-
             fromMap = fromMap@{ data ->
                 val id = data["id"]?.toLongOrNull() ?: return@fromMap null
                 val instrumentId = data["instrumentId"]?.toLongOrNull() ?: return@fromMap null
                 val type = MaintenanceType.valueOf(data["type"] ?: "REPAIR")
                 val details = data["details"] ?: ""
                 val doneAt = Instant.parse(data["doneAt"] ?: return@fromMap null)
+                // ownerUsername теперь читается из data, а не из воздуха
+                val ownerUsername = data["ownerUsername"] ?: "SYSTEM"
                 val createdAt = Instant.parse(data["createdAt"] ?: return@fromMap null)
 
                 Maintenance(
@@ -42,7 +41,6 @@ object MaintenanceSaveLoad {
                     createdAt = createdAt
                 )
             },
-
             extractId = { it.id }
         )
     }
