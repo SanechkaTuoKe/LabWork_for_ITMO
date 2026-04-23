@@ -78,7 +78,8 @@ fun AuthView(
                                 .onSuccess {
                                     successMsg = "Registered! Now login."
                                     isRegisterMode = false
-                                    login = ""; password = ""
+                                    login = "";
+                                    password = ""
                                 }
                                 .onFailure { errorMsg = it.message }
                         } else {
