@@ -39,7 +39,7 @@ fun AuthView(
                 style = MaterialTheme.typography.titleLarge
             )
 
-            Divider(color = ColorDivider)
+            HorizontalDivider(color = ColorDivider)
 
             OutlinedTextField(
                 value = login,
