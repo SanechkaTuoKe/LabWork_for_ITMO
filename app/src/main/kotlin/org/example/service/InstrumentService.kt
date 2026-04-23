@@ -47,8 +47,12 @@ class InstrumentService {
 
     fun update(id: Long, name: String? = null, location: String? = null, inventoryNumber: String? = null): Instrument {
         val instrument = getByIdOrThrow(id)
-        if (name != null) { InstrumentValidator.validateName(name); instrument.name = name }
-        if (location != null) { InstrumentValidator.validateLocation(location); instrument.location = location }
+        if (name != null) {
+            InstrumentValidator.validateName(name);
+            instrument.name = name }
+        if (location != null) {
+            InstrumentValidator.validateLocation(location);
+            instrument.location = location }
         if (inventoryNumber != null) {
             instrument.inventoryNumber = inventoryNumber.takeIf { it.isNotBlank() }
                 ?.also { InstrumentValidator.validateInventoryNumber(it) }
