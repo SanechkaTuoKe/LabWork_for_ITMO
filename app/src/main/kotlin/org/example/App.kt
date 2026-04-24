@@ -34,6 +34,9 @@ fun main() {
         userService
     )
 
+    // val loopService = LoopService(commandService)
+// loopService.loopOfCommands()
+    
     application {
         Window(
             onCloseRequest = ::exitApplication,
