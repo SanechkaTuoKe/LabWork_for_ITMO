@@ -18,6 +18,29 @@ import org.example.ui.instruments.InstrumentDetailView
 import org.example.ui.instruments.InstrumentMasterView
 import org.example.ui.instruments.dialogs.*
 import org.example.ui.theme.*
+import javax.swing.JFileChooser
+import com.mohamedrejeb.calf.picker.FilePickerSelectionMode
+import androidx.compose.material.icons.filled.AccountCircle
+
+
+@Composable
+fun TopBarButton(
+    text: String,
+    onClick: () -> Unit,
+    isPrimary: Boolean = false
+) {
+    Button(
+        onClick = onClick,
+        shape = RoundedCornerShape(0.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = if (isPrimary) ColorSecondary else ColorPrimaryVar,
+            contentColor = ColorOnPrimary
+        ),
+        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+    ) {
+        Text(text, style = MaterialTheme.typography.labelSmall)
+    }
+}
 
 @Composable
 fun MainScreen(
