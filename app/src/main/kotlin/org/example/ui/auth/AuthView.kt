@@ -46,7 +46,7 @@ fun AuthView(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(ColorBackground),
+            .background(MaterialTheme.colorScheme.background),
         contentAlignment = Alignment.Center
     ) {
         Column(
