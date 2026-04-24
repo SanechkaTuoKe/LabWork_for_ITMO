@@ -112,7 +112,9 @@ class InstrumentController(
         }
     }
 
-    fun select(inst: Instrument) { selected.value = inst }
+    fun select(inst: Instrument) {
+        selected.value = inst
+    }
 
     private fun requireAuth(): Boolean {
         if (!userService.isLoggedIn) {
