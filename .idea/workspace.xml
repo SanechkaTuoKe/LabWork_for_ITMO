@@ -6,32 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="854374bb-eed7-42f4-a74d-ca8fcde7fecf" name="Changes" comment="во время сдачи">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/App.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/App.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/auth/UserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/auth/UserService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/CalAddHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/CalAddHandler.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/InstAddHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/InstAddHandler.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/MaintAddHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/MaintAddHandler.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/services/CommandService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/services/CommandService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/domain/Instrument.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/domain/Instrument.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/CalibrationService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/CalibrationService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/InstrumentService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/InstrumentService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/MaintenanceService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/MaintenanceService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/StorageService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/StorageService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/InstrumentSaveLoad.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/InstrumentSaveLoad.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/MainView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/MainView.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/auth/AuthView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/auth/AuthView.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/InstrumentController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/InstrumentController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/InstrumentDetailView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/InstrumentDetailView.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/AddInstrumentDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/AddInstrumentDialog.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/CalibrationDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/CalibrationDialog.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/Composabe.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/DialogComponents.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/DialogComponents.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/EditInstrumentDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/EditInstrumentDialog.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/FilePickerDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/FilePickerDialog.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/MaintenanceDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/MaintenanceDialog.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/theme/AppTheme.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/theme/AppTheme.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/app/users.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -8,9 +8,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 
-val ColorPrimary     = Color(0xFF2B5278)
-val ColorPrimaryVar  = Color(0xFF1E3A52)
-val ColorSecondary   = Color(0xFF4A7FA5)
+val ColorPrimary     = Color(0xFFEA8FE7)
+val ColorPrimaryVar  = Color(0xFFBA92F3)
+val ColorSecondary   = Color(0xFF6FAEDB)
 val ColorBackground  = Color(0xFFF0F2F5)
 val ColorSurface     = Color(0xFFFFFFFF)
 val ColorSurfaceVar  = Color(0xFFE4E8EE)
