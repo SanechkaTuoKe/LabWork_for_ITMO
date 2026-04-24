@@ -31,7 +31,76 @@ class InstrumentController(
     var calibrationUpdateCounter = mutableStateOf(0)
     var maintenanceUpdateCounter = mutableStateOf(0)
 
-    init { refresh() }
+    private fun getUserDataDir(): java.nio.file.Path {
+        val username = userService.currentUsername
+        return Paths.get("./data/$username")
+    }
+
+    init {
+        if (userService.isLoggedIn) {
+            loadUserData()
+        }
+        refresh()
+    }
+
+    fun onUserLoggedIn() {
+        loadUserData()
+        refresh()
+    }
+
+    private fun loadUserData() {
+        scope.launch {
+            try {
+                val userDir = getUserDataDir()
+                val instrumentSL = InstrumentSaveLoad.create(userDir.resolve("instruments.csv"))
+                val calibrationSL = CalibrationSaveLoad.create(userDir.resolve("calibrations.csv"))
+                val maintenanceSL = MaintenanceSaveLoad.create(userDir.resolve("maintenances.csv"))
+
+                if (instrumentSL.exists()) {
+                    val loadedInstruments = instrumentSL.load()
+                    instrumentService.clearAll()
+                    loadedInstruments.values.forEach { instrument ->
+                        instrumentService.addExisting(instrument)
+                    }
+                }
+
+                if (calibrationSL.exists()) {
+                    calibrationService.clearAll()
+                    calibrationSL.load().values.forEach { calibration ->
+                        calibrationService.addExisting(calibration)
+                    }
+                }
+
+                if (maintenanceSL.exists()) {
+                    maintenanceService.clearAll()
+                    maintenanceSL.load().values.forEach { maintenance ->
+                        maintenanceService.addExisting(maintenance)
+                    }
+                }
+                status.value = "Data loaded"
+            } catch (e: Exception) {
+            }
+        }
+    }
+    private fun saveUserData() {
+        scope.launch {
+            try {
+                val userDir = getUserDataDir()
+                java.nio.file.Files.createDirectories(userDir)
+
+                InstrumentSaveLoad.create(userDir.resolve("instruments.csv"))
+                    .save(instrumentService.getAll())
+
+                CalibrationSaveLoad.create(userDir.resolve("calibrations.csv"))
+                    .save(calibrationService.getAll())
+
+                MaintenanceSaveLoad.create(userDir.resolve("maintenances.csv"))
+                    .save(maintenanceService.getAll())
+            } catch (e: Exception) {
+                error.value = "Auto-save error: ${e.message}"
+            }
+        }
+    }
 
     fun refresh() {
         scope.launch {
