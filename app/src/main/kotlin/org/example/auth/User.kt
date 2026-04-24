@@ -3,7 +3,7 @@ import java.security.MessageDigest
 
 data class User(
     val login: String,
-    val passwordHash: String  // SHA-256 хеш, не открытый пароль
+    val passwordHash: String
 ) {
     companion object {
         fun hashPassword(password: String): String {
