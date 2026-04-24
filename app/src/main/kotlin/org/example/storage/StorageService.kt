@@ -44,7 +44,6 @@ class StorageService(
         )
         instrumentService.loadAll(loadedInstruments)
 
-        // --- Загружаем калибровки ---
         val loadedCalibrations = CalibrationSaveLoad.create(dir.resolve("calibrations.csv")).load()
         loadedCalibrations.values.forEach { cal ->
             val err = CalibrationStorageValidator.validate(cal)
@@ -55,7 +54,6 @@ class StorageService(
         )
         calibrationService.loadAll(loadedCalibrations)
 
-        // --- Загружаем обслуживания ---
         val loadedMaintenances = MaintenanceSaveLoad.create(dir.resolve("maintenances.csv")).load()
         loadedMaintenances.values.forEach { m ->
             val err = MaintenanceStorageValidator.validate(m)

@@ -5,37 +5,33 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.mohamedrejeb.calf.picker.FilePickerSelectionMode
-import coil3.compose.LocalPlatformContext
-import com.mohamedrejeb.calf.picker.FilePickerFileType
-import com.mohamedrejeb.calf.picker.rememberFilePickerLauncher
+import java.io.File
+import javax.swing.JFileChooser
+import javax.swing.SwingUtilities
 
 @Composable
 fun FilePickerDialog(
     title: String,
     hint: String,
     confirmLabel: String,
-    selectionMode: FilePickerSelectionMode = FilePickerSelectionMode.Single,
     onConfirm: (String) -> Unit,
     onDismiss: () -> Unit
 ) {
-    var path by remember { mutableStateOf("./data") }
-    var selectedFileName by remember { mutableStateOf("") }
-
-    val filePickerLauncher = rememberFilePickerLauncher(
-        selectionMode = selectionMode,
-        onResult = { result ->
-            if (result != null) {
-                path = result.toString()
-                selectedFileName = result.toString()
-            }
-        }
-    )
+    var path by remember { mutableStateOf(hint) }
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -44,18 +40,9 @@ fun FilePickerDialog(
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(
-                    "Enter the path or use the browser to pick one.",
+                    "Enter the directory path or click Browse to pick one.",
                     style = MaterialTheme.typography.bodySmall
                 )
-
-                if (selectedFileName.isNotEmpty()) {
-                    Text(
-                        "Selected: $selectedFileName",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                }
-
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -63,18 +50,26 @@ fun FilePickerDialog(
                 ) {
                     OutlinedTextField(
                         value = path,
-                        onValueChange = {
-                            path = it
-                            if (it != path) selectedFileName = ""
-                        },
-                        label = { Text(hint) },
+                        onValueChange = { path = it },
+                        label = { Text("Path") },
                         singleLine = true,
                         modifier = Modifier.weight(1f),
                         shape = RoundedCornerShape(0.dp)
                     )
                     TextButton(
                         onClick = {
-                            filePickerLauncher.launch()
+                            SwingUtilities.invokeLater {
+                                val chooser = JFileChooser()
+                                chooser.fileSelectionMode = JFileChooser.DIRECTORIES_ONLY
+                                chooser.dialogTitle = title
+                                chooser.currentDirectory = File(path).let {
+                                    if (it.exists()) it else File(".")
+                                }
+                                val result = chooser.showOpenDialog(null)
+                                if (result == JFileChooser.APPROVE_OPTION) {
+                                    path = chooser.selectedFile.absolutePath
+                                }
+                            }
                         },
                         shape = RoundedCornerShape(0.dp)
                     ) {
@@ -88,10 +83,14 @@ fun FilePickerDialog(
                 onClick = { onConfirm(path) },
                 enabled = path.isNotBlank(),
                 shape = RoundedCornerShape(0.dp)
-            ) { Text(confirmLabel) }
+            ) {
+                Text(confirmLabel)
+            }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss, shape = RoundedCornerShape(0.dp)) { Text("Cancel") }
+            TextButton(onClick = onDismiss, shape = RoundedCornerShape(0.dp)) {
+                Text("Cancel")
+            }
         }
     )
 }

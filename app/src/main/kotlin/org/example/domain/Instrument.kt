@@ -9,7 +9,7 @@ class Instrument(
     var inventoryNumber: String?,
     var location: String,
     var status: InstrumentStatus,
-    val ownerUsername: String,
+    val ownerUsername: String?,
     val createdAt: Instant,
     var updatedAt: Instant
 

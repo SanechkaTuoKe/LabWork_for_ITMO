@@ -16,8 +16,7 @@ fun CalibrationDialog(
     var type by remember { mutableStateOf<CalibrationType?>(null) }
     var result by remember { mutableStateOf<CalibrationResult?>(null) }
     var comment by remember { mutableStateOf("") }
-    var typeExpanded by remember { mutableStateOf(false) }
-    var resultExpanded by remember { mutableStateOf(false) }
+
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -29,17 +28,13 @@ fun CalibrationDialog(
                     label = "Type",
                     selected = type?.name?.replace("_", " "),
                     options = CalibrationType.values().map { it.name.replace("_", " ") },
-                    expanded = typeExpanded,
-                    onExpandedChange = { typeExpanded = it },
-                    onSelect = { idx -> type = CalibrationType.values()[idx]; typeExpanded = false }
+                    onSelect = { idx -> type = CalibrationType.values()[idx]}
                 )
                 AppDropdown(
                     label = "Result",
                     selected = result?.name,
                     options = CalibrationResult.values().map { it.name },
-                    expanded = resultExpanded,
-                    onExpandedChange = { resultExpanded = it },
-                    onSelect = { idx -> result = CalibrationResult.values()[idx]; resultExpanded = false }
+                    onSelect = { idx -> result = CalibrationResult.values()[idx]}
                 )
                 AppTextField(value = comment, onValueChange = { comment = it }, label = "Comment (optional)")
             }

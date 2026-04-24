@@ -1,14 +1,13 @@
 package org.example.ui.instruments.dialogs
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import org.example.ui.theme.*
 
@@ -26,52 +25,53 @@ fun AppTextField(
         singleLine = true,
         enabled = enabled,
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(0.dp)
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppDropdown(
     label: String,
     selected: String?,
     options: List<String>,
-    expanded: Boolean,
-    onExpandedChange: (Boolean) -> Unit,
-    onSelect: (Int) -> Unit
+    onSelect: (Int) -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true
 ) {
-    Column(modifier = Modifier.fillMaxWidth()) {
-        Text(label, style = MaterialTheme.typography.labelSmall, color = ColorOnSurfaceVar)
-        Spacer(Modifier.height(4.dp))
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .border(1.dp, ColorDivider)
-                .background(ColorSurface)
-                .clickable { onExpandedChange(true) }
-                .padding(horizontal = 12.dp, vertical = 10.dp)
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    selected ?: "— select —",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = if (selected != null) ColorOnSurface else ColorOnSurfaceVar
-                )
-                Text("▾", style = MaterialTheme.typography.bodySmall, color = ColorOnSurfaceVar)
-            }
-        }
-        DropdownMenu(
+    var expanded by remember { mutableStateOf(false) }
+
+    Column(modifier = modifier) {
+        ExposedDropdownMenuBox(
             expanded = expanded,
-            onDismissRequest = { onExpandedChange(false) }
+            onExpandedChange = { expanded = !expanded }
         ) {
-            options.forEachIndexed { idx, option ->
-                DropdownMenuItem(
-                    text = { Text(option, style = MaterialTheme.typography.bodySmall) },
-                    onClick = { onSelect(idx) }
-                )
+            OutlinedTextField(
+                value = selected ?: "Select...",
+                onValueChange = {},
+                readOnly = true,
+                enabled = enabled,
+                label = { Text(label) },
+                trailingIcon = {
+                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+                },
+                modifier = Modifier
+                    .menuAnchor()
+                    .fillMaxWidth()
+            )
+
+            ExposedDropdownMenu(
+                expanded = expanded,
+                onDismissRequest = { expanded = false }
+            ) {
+                options.forEachIndexed { index, option ->
+                    DropdownMenuItem(
+                        text = { Text(option) },
+                        onClick = {
+                            onSelect(index)
+                            expanded = false
+                        }
+                    )
+                }
             }
         }
     }

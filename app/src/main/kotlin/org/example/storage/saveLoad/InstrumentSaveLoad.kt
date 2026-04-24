@@ -22,7 +22,7 @@ object InstrumentSaveLoad {
                     "ownerUsername" to inst.ownerUsername,
                     "createdAt" to inst.createdAt.toString(),
                     "updatedAt" to inst.updatedAt.toString()
-                )
+                ) as Map<String, String>
             },
             fromMap = fromMap@{ d ->
                 try {

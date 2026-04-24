@@ -18,7 +18,7 @@ fun AddInstrumentDialog(
     var location by remember { mutableStateOf("") }
     var inventory by remember { mutableStateOf("") }
     var type by remember { mutableStateOf<InstrumentType?>(null) }
-    var typeExpanded by remember { mutableStateOf(false) }
+
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -31,11 +31,8 @@ fun AddInstrumentDialog(
                     label = "Type",
                     selected = type?.name?.replace("_", " "),
                     options = InstrumentType.values().map { it.name.replace("_", " ") },
-                    expanded = typeExpanded,
-                    onExpandedChange = { typeExpanded = it },
                     onSelect = { idx ->
                         type = InstrumentType.values()[idx]
-                        typeExpanded = false
                     }
                 )
 

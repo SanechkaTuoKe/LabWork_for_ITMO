@@ -25,7 +25,6 @@ fun EditInstrumentDialog(
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 AppTextField(value = name, onValueChange = { name = it }, label = "Name")
-                // Тип не меняется при редактировании
                 AppTextField(value = instrument.type.name.replace("_", " "), onValueChange = {}, label = "Type", enabled = false)
                 AppTextField(value = location, onValueChange = { location = it }, label = "Location")
                 AppTextField(value = inventory, onValueChange = { inventory = it }, label = "Inventory number (optional)")

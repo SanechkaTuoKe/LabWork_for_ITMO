@@ -1,12 +1,15 @@
 package org.example.cli.handlers
 
+import org.example.auth.UserService
 import org.example.cli.services.ReaderService
-import org.example.service.MaintenanceService
 import org.example.service.InstrumentService
+import org.example.service.MaintenanceService
 import org.example.validation.MaintenanceValidator
+import java.time.Instant
 
 class MaintAddHandler(
-    private val maintenanceService: MaintenanceService
+    private val maintenanceService: MaintenanceService,
+    private val userService: UserService
 ) : BaseHandler {
 
     private val reader = ReaderService()
@@ -17,6 +20,9 @@ class MaintAddHandler(
         commandList: Collection<BaseHandler>
     ): Boolean {
         return try {
+            val username = userService.currentUsername
+                ?: throw IllegalStateException("You must be logged in to add maintenance records")
+
             val instrumentId = params.getOrNull(0)?.toLongOrNull()
                 ?: throw IllegalArgumentException("Instrument ID must be a number")
 
@@ -27,7 +33,13 @@ class MaintAddHandler(
             println("Enter details:")
             val details = reader.readCommand().joinToString(" ")
 
-            val maintenance = maintenanceService.add(instrumentId, type, details)
+            val maintenance = maintenanceService.add(
+                instrumentId,
+                type,
+                details,
+                username,
+                Instant.now()
+            )
 
             println("OK maintenance_id=${maintenance.id}")
             true
@@ -39,5 +51,5 @@ class MaintAddHandler(
     }
 
     override fun help(): String =
-        "maint_add <instrument_id>"
+        "maint_add <instrument_id> - Add maintenance record (requires login)"
 }

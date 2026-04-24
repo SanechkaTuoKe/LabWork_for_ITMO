@@ -1,9 +1,11 @@
 package org.example.service
 
-import org.example.domain.*
+import org.example.domain.Instrument
+import org.example.domain.InstrumentStatus
+import org.example.domain.InstrumentType
 import org.example.validation.InstrumentValidator
 import java.time.Instant
-import java.util.*
+import java.util.TreeMap
 
 class InstrumentService {
 
@@ -15,7 +17,7 @@ class InstrumentService {
         type: InstrumentType,
         inventoryNumber: String?,
         location: String,
-        ownerUsername: String = "SYSTEM"
+        ownerUsername: String?
     ): Instrument {
         InstrumentValidator.validateName(name)
         InstrumentValidator.validateLocation(location)
@@ -40,21 +42,30 @@ class InstrumentService {
     }
 
     fun getById(id: Long): Instrument? = instruments[id]
+
     fun getByIdOrThrow(id: Long): Instrument =
         instruments[id] ?: throw NoSuchElementException("Instrument with id=$id not found")
 
     fun getAll(): List<Instrument> = instruments.values.toList()
 
-    fun update(id: Long, name: String? = null, location: String? = null, inventoryNumber: String? = null): Instrument {
+    fun update(
+        id: Long,
+        name: String? = null,
+        location: String? = null,
+        inventoryNumber: String? = null
+    ): Instrument {
         val instrument = getByIdOrThrow(id)
         if (name != null) {
-            InstrumentValidator.validateName(name);
-            instrument.name = name }
+            InstrumentValidator.validateName(name)
+            instrument.name = name
+        }
         if (location != null) {
-            InstrumentValidator.validateLocation(location);
-            instrument.location = location }
+            InstrumentValidator.validateLocation(location)
+            instrument.location = location
+        }
         if (inventoryNumber != null) {
-            instrument.inventoryNumber = inventoryNumber.takeIf { it.isNotBlank() }
+            instrument.inventoryNumber = inventoryNumber
+                .takeIf { it.isNotBlank() }
                 ?.also { InstrumentValidator.validateInventoryNumber(it) }
         }
         instrument.updatedAt = Instant.now()
@@ -69,20 +80,29 @@ class InstrumentService {
     }
 
     fun delete(id: Long) {
-        if (instruments.remove(id) == null)
+        if (instruments.remove(id) == null) {
             throw NoSuchElementException("Instrument with id=$id not found")
+        }
     }
 
     fun exists(id: Long): Boolean = instruments.containsKey(id)
 
-    /**
-     * Загружает коллекцию из файла.
-     * nextId выставляется как max(существующих id) + 1
-     */
     fun loadAll(loaded: Map<Long, Instrument>) {
         instruments.clear()
         instruments.putAll(loaded)
         nextId = if (loaded.isEmpty()) 1L else loaded.keys.max() + 1L
+    }
+
+    fun addExisting(instrument: Instrument) {
+        instruments[instrument.id] = instrument
+        if (instrument.id >= nextId) {
+            nextId = instrument.id + 1
+        }
+    }
+
+    fun clearAll() {
+        instruments.clear()
+        nextId = 1L
     }
 
     internal fun getAllInstruments(): TreeMap<Long, Instrument> = instruments

@@ -61,12 +61,22 @@ class CalibrationService(
         calibrations.entries.removeIf { it.value.instrumentId == instrumentId }
     }
 
-    /** Загружает коллекцию из файла, пересчитывает nextId. */
     fun loadAll(loaded: Map<Long, Calibration>) {
         calibrations.clear()
         calibrations.putAll(loaded)
         nextId = if (loaded.isEmpty()) 1L else loaded.keys.max() + 1L
     }
 
+    fun addExisting(calibration: Calibration) {
+        calibrations[calibration.id] = calibration
+        if (calibration.id >= nextId) {
+            nextId = calibration.id + 1
+        }
+    }
+
+    fun clearAll() {
+        calibrations.clear()
+        nextId = 1L
+    }
     internal fun getAllCalibrations(): TreeMap<Long, Calibration> = calibrations
 }

@@ -19,11 +19,12 @@ val ColorOnSurface   = Color(0xFF1A1A2E)
 val ColorOnSurfaceVar= Color(0xFF4A5568)
 val ColorError       = Color(0xFFB91C1C)
 val ColorDivider     = Color(0xFFCBD5E1)
+val ColorPrimaryContainer = Color(0xFFD6E8F7)
 
 private val AppColorScheme = lightColorScheme(
     primary          = ColorPrimary,
     onPrimary        = ColorOnPrimary,
-    primaryContainer = Color(0xFFD6E8F7),
+    primaryContainer = ColorPrimaryContainer,
     secondary        = ColorSecondary,
     onSecondary      = ColorOnPrimary,
     background       = ColorBackground,
@@ -37,12 +38,12 @@ private val AppColorScheme = lightColorScheme(
 )
 
 private val AppTypography = Typography(
-    titleLarge  = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.SemiBold, color = ColorOnSurface),
+    titleLarge = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.SemiBold, color = ColorOnSurface),
     titleMedium = TextStyle(fontSize = 15.sp, fontWeight = FontWeight.SemiBold, color = ColorOnSurface),
-    titleSmall  = TextStyle(fontSize = 13.sp, fontWeight = FontWeight.Medium,   color = ColorOnSurfaceVar),
-    bodyMedium  = TextStyle(fontSize = 13.sp, fontWeight = FontWeight.Normal,   color = ColorOnSurface),
-    bodySmall   = TextStyle(fontSize = 12.sp, fontWeight = FontWeight.Normal,   color = ColorOnSurfaceVar),
-    labelSmall  = TextStyle(fontSize = 11.sp, fontWeight = FontWeight.Medium,   color = ColorOnSurfaceVar)
+    titleSmall = TextStyle(fontSize = 13.sp, fontWeight = FontWeight.Medium, color = ColorOnSurfaceVar),
+    bodyMedium = TextStyle(fontSize = 13.sp, fontWeight = FontWeight.Normal, color = ColorOnSurface),
+    bodySmall = TextStyle(fontSize = 12.sp, fontWeight = FontWeight.Normal, color = ColorOnSurfaceVar),
+    labelSmall = TextStyle(fontSize = 11.sp, fontWeight = FontWeight.Medium, color = ColorOnSurfaceVar)
 )
 
 @Composable

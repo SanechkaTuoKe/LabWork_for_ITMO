@@ -14,7 +14,6 @@ fun MaintenanceDialog(
 ) {
     var type by remember { mutableStateOf<MaintenanceType?>(null) }
     var details by remember { mutableStateOf("") }
-    var typeExpanded by remember { mutableStateOf(false) }
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -26,9 +25,7 @@ fun MaintenanceDialog(
                     label = "Type",
                     selected = type?.name,
                     options = MaintenanceType.values().map { it.name },
-                    expanded = typeExpanded,
-                    onExpandedChange = { typeExpanded = it },
-                    onSelect = { idx -> type = MaintenanceType.values()[idx]; typeExpanded = false }
+                    onSelect = { idx -> type = MaintenanceType.values()[idx]}
                 )
                 AppTextField(value = details, onValueChange = { details = it }, label = "Details")
             }

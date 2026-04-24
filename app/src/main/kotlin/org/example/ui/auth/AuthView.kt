@@ -1,16 +1,36 @@
 package org.example.ui.auth
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import org.example.auth.UserService
-import org.example.ui.theme.*
+import org.example.ui.theme.ColorBackground
+import org.example.ui.theme.ColorDivider
+import org.example.ui.theme.ColorError
+import org.example.ui.theme.ColorPrimary
+import org.example.ui.theme.ColorSurface
 
 @Composable
 fun AuthView(
@@ -24,7 +44,9 @@ fun AuthView(
     var successMsg by remember { mutableStateOf<String?>(null) }
 
     Box(
-        modifier = Modifier.fillMaxSize().background(ColorBackground),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(ColorBackground),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -32,7 +54,7 @@ fun AuthView(
                 .width(360.dp)
                 .background(ColorSurface)
                 .padding(32.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text(
                 text = if (isRegisterMode) "Register" else "Login",
@@ -43,7 +65,10 @@ fun AuthView(
 
             OutlinedTextField(
                 value = login,
-                onValueChange = { login = it; errorMsg = null },
+                onValueChange = {
+                    login = it
+                    errorMsg = null
+                },
                 label = { Text("Login") },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
@@ -52,7 +77,10 @@ fun AuthView(
 
             OutlinedTextField(
                 value = password,
-                onValueChange = { password = it; errorMsg = null },
+                onValueChange = {
+                    password = it
+                    errorMsg = null
+                },
                 label = { Text("Password") },
                 singleLine = true,
                 visualTransformation = PasswordVisualTransformation(),
@@ -61,10 +89,19 @@ fun AuthView(
             )
 
             if (errorMsg != null) {
-                Text(errorMsg!!, color = ColorError, style = MaterialTheme.typography.bodySmall)
+                Text(
+                    text = errorMsg!!,
+                    color = ColorError,
+                    style = MaterialTheme.typography.bodySmall
+                )
             }
+
             if (successMsg != null) {
-                Text(successMsg!!, color = ColorPrimary, style = MaterialTheme.typography.bodySmall)
+                Text(
+                    text = successMsg!!,
+                    color = ColorPrimary,
+                    style = MaterialTheme.typography.bodySmall
+                )
             }
 
             Row(
@@ -78,7 +115,7 @@ fun AuthView(
                                 .onSuccess {
                                     successMsg = "Registered! Now login."
                                     isRegisterMode = false
-                                    login = "";
+                                    login = ""
                                     password = ""
                                 }
                                 .onFailure { errorMsg = it.message }
@@ -97,7 +134,11 @@ fun AuthView(
             }
 
             TextButton(
-                onClick = { isRegisterMode = !isRegisterMode; errorMsg = null; successMsg = null },
+                onClick = {
+                    isRegisterMode = !isRegisterMode
+                    errorMsg = null
+                    successMsg = null
+                },
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
