@@ -41,7 +41,11 @@ fun CalibrationDialog(
         },
         confirmButton = {
             Button(
-                onClick = { onConfirm(type!!.name, result!!.name, comment.ifBlank { null }) },
+                onClick = {
+                    onConfirm(type!!.name,
+                        result!!.name,
+                        comment.ifBlank { null })
+                          },
                 enabled = type != null && result != null,
                 shape = RoundedCornerShape(0.dp)
             ) { Text("Add") }

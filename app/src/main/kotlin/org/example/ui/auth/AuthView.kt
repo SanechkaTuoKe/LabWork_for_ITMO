@@ -31,21 +31,30 @@ fun AuthView(
         Column(
             modifier = Modifier
                 .width(360.dp)
-                .background(MaterialTheme.colorScheme.surface)
+                .background(
+                    color = MaterialTheme.colorScheme.surface,
+                    shape = RoundedCornerShape(0.dp)
+                )
                 .padding(32.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 text = if (isRegisterMode) "Register" else "Login",
                 style = MaterialTheme.typography.titleLarge
             )
 
-            HorizontalDivider(color = MaterialTheme.colorScheme.outline)
+            HorizontalDivider(
+                color = MaterialTheme.colorScheme.outline,
+                modifier = Modifier.fillMaxWidth()
+            )
 
             OutlinedTextField(
                 value = login,
-                onValueChange = { login = it;
-                    errorMsg = null },
+                onValueChange = {
+                    login = it
+                    errorMsg = null
+                },
                 label = { Text("Login") },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
@@ -54,8 +63,10 @@ fun AuthView(
 
             OutlinedTextField(
                 value = password,
-                onValueChange = { password = it;
-                    errorMsg = null },
+                onValueChange = {
+                    password = it
+                    errorMsg = null
+                },
                 label = { Text("Password") },
                 singleLine = true,
                 visualTransformation = PasswordVisualTransformation(),
@@ -63,24 +74,23 @@ fun AuthView(
                 shape = RoundedCornerShape(0.dp)
             )
 
-            val msg = errorMsg
-            if (msg != null) {
+            val error = errorMsg
+            if (error != null) {
                 Text(
-                    text = msg,
+                    text = error,
                     color = MaterialTheme.colorScheme.error,
                     style = MaterialTheme.typography.bodySmall
                 )
             }
 
-            val okMsg = successMsg
-            if (okMsg != null) {
+            val success = successMsg
+            if (success != null) {
                 Text(
-                    text = okMsg,
+                    text = success,
                     color = MaterialTheme.colorScheme.primary,
                     style = MaterialTheme.typography.bodySmall
                 )
             }
-
             Button(
                 onClick = {
                     if (isRegisterMode) {
@@ -98,7 +108,7 @@ fun AuthView(
                             .onFailure { errorMsg = it.message }
                     }
                 },
-                modifier = Modifier.weight(1f),
+                modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(0.dp),
                 enabled = login.isNotBlank() && password.isNotBlank()
             ) {

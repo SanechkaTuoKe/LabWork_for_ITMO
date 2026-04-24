@@ -7,7 +7,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.example.domain.InstrumentType
-import org.example.ui.theme.*
 
 @Composable
 fun AddInstrumentDialog(
@@ -18,7 +17,6 @@ fun AddInstrumentDialog(
     var location by remember { mutableStateOf("") }
     var inventory by remember { mutableStateOf("") }
     var type by remember { mutableStateOf<InstrumentType?>(null) }
-
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -35,14 +33,20 @@ fun AddInstrumentDialog(
                         type = InstrumentType.values()[idx]
                     }
                 )
-
                 AppTextField(value = location, onValueChange = { location = it }, label = "Location")
                 AppTextField(value = inventory, onValueChange = { inventory = it }, label = "Inventory number (optional)")
             }
         },
         confirmButton = {
             Button(
-                onClick = { onConfirm(name, type!!, location, inventory.ifBlank { null }) },
+                onClick = {
+                    onConfirm(
+                        name,
+                        type!!,
+                        location,
+                        inventory.ifBlank { null }
+                    )
+                },
                 enabled = name.isNotBlank() && location.isNotBlank() && type != null,
                 shape = RoundedCornerShape(0.dp)
             ) { Text("Add") }

@@ -1,29 +1,11 @@
 package org.example.ui
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -42,9 +24,6 @@ import org.example.ui.instruments.dialogs.CalibrationDialog
 import org.example.ui.instruments.dialogs.EditInstrumentDialog
 import org.example.ui.instruments.dialogs.FilePickerDialog
 import org.example.ui.instruments.dialogs.MaintenanceDialog
-import org.example.ui.theme.ColorBackground
-import org.example.ui.theme.ColorOnPrimary
-import org.example.ui.theme.ColorPrimary
 import java.time.Instant
 
 @Composable
@@ -77,17 +56,21 @@ fun MainScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(ColorBackground)
+            .background(MaterialTheme.colorScheme.background)
     ) {
+        // топбар
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(ColorPrimary)
+                .background(MaterialTheme.colorScheme.primary)
                 .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Text("Equipment Manager", color = ColorOnPrimary)
+            Text(
+                "Equipment Manager",
+                color = MaterialTheme.colorScheme.onPrimary
+            )
 
             Button(onClick = { controller.refresh() }) { Text("Refresh") }
             Button(onClick = { showAdd = true }) { Text("Add") }
@@ -99,26 +82,30 @@ fun MainScreen(
             Icon(
                 imageVector = Icons.Default.AccountCircle,
                 contentDescription = null,
-                tint = ColorOnPrimary
+                tint = MaterialTheme.colorScheme.onPrimary
             )
-            Text(userService.currentUsername ?: "", color = ColorOnPrimary)
+            Text(
+                userService.currentUsername ?: "",
+                color = MaterialTheme.colorScheme.onPrimary
+            )
 
             TextButton(onClick = {
                 userService.logout()
                 isLoggedIn = false
             }) {
-                Text("Logout", color = ColorOnPrimary)
+                Text("Logout", color = MaterialTheme.colorScheme.onPrimary)
             }
         }
 
+        // статусная
         if (controller.status.value != "Ready") {
             Text(
                 controller.status.value,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(ColorPrimary.copy(alpha = 0.8f))
+                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.8f))
                     .padding(horizontal = 16.dp, vertical = 4.dp),
-                color = ColorOnPrimary
+                color = MaterialTheme.colorScheme.onPrimary
             )
         }
 
@@ -245,7 +232,6 @@ fun MainScreen(
     if (showSave) {
         FilePickerDialog(
             title = "Save",
-            hint = "./data",
             confirmLabel = "Save",
             onConfirm = { path ->
                 controller.save(path)
@@ -258,7 +244,6 @@ fun MainScreen(
     if (showLoad) {
         FilePickerDialog(
             title = "Load",
-            hint = "./data",
             confirmLabel = "Load",
             onConfirm = { path ->
                 controller.load(path)
@@ -267,4 +252,4 @@ fun MainScreen(
             onDismiss = { showLoad = false }
         )
     }
-}
+}//цвета
