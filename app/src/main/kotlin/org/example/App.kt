@@ -13,6 +13,9 @@ import org.example.ui.MainScreen
 import org.example.ui.instruments.InstrumentController
 import org.example.ui.theme.EquipmentAppTheme
 
+
+
+
 fun main() {
     val userService = UserService()
 
@@ -35,8 +38,8 @@ fun main() {
     )
 
     // val loopService = LoopService(commandService)
-// loopService.loopOfCommands()
-    
+    // loopService.loopOfCommands()
+
     application {
         Window(
             onCloseRequest = ::exitApplication,

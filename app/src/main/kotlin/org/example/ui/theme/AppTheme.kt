@@ -38,12 +38,12 @@ private val AppColorScheme = lightColorScheme(
 )
 
 private val AppTypography = Typography(
-    titleLarge = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.SemiBold, color = ColorOnSurface),
-    titleMedium = TextStyle(fontSize = 15.sp, fontWeight = FontWeight.SemiBold, color = ColorOnSurface),
-    titleSmall = TextStyle(fontSize = 13.sp, fontWeight = FontWeight.Medium, color = ColorOnSurfaceVar),
-    bodyMedium = TextStyle(fontSize = 13.sp, fontWeight = FontWeight.Normal, color = ColorOnSurface),
-    bodySmall = TextStyle(fontSize = 12.sp, fontWeight = FontWeight.Normal, color = ColorOnSurfaceVar),
-    labelSmall = TextStyle(fontSize = 11.sp, fontWeight = FontWeight.Medium, color = ColorOnSurfaceVar)
+    titleLarge = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.SemiBold),
+    titleMedium = TextStyle(fontSize = 15.sp, fontWeight = FontWeight.SemiBold),
+    titleSmall = TextStyle(fontSize = 13.sp, fontWeight = FontWeight.Medium),
+    bodyMedium = TextStyle(fontSize = 13.sp, fontWeight = FontWeight.Normal),
+    bodySmall = TextStyle(fontSize = 12.sp, fontWeight = FontWeight.Normal),
+    labelSmall = TextStyle(fontSize = 11.sp, fontWeight = FontWeight.Medium,)
 )
 
 @Composable
