@@ -52,7 +52,7 @@ fun AuthView(
         Column(
             modifier = Modifier
                 .width(360.dp)
-                .background(ColorSurface)
+                .background(MaterialTheme.colorScheme.surface)
                 .padding(32.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
