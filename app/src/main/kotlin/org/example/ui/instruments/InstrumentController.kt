@@ -16,14 +16,7 @@ class InstrumentController(
 ) {
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
-    // StorageService — чистый, без болванок
-    private val storageService = StorageService(
-        instrumentService,
-        calibrationService,
-        maintenanceService
-    )
-
-    var instruments = mutableStateOf(listOf<Instrument>())
+    var instruments = mutableStateOf<List<Instrument>>(emptyList())
     var selected = mutableStateOf<Instrument?>(null)
     var isLoading = mutableStateOf(false)
     var error = mutableStateOf<String?>(null)
