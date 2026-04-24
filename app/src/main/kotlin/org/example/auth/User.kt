@@ -7,8 +7,9 @@ data class User(
 ) {
     companion object {
         fun hashPassword(password: String): String {
-            val digest = MessageDigest.getInstance("SHA-256")
-            val bytes = digest.digest(password.toByteArray(Charsets.UTF_8))
+            val md = MessageDigest.getInstance("SHA-256")
+            val input = password.toByteArray(Charsets.UTF_8)
+            val bytes = md.digest(input)
             return bytes.joinToString("") { "%02x".format(it) }
         }
 
