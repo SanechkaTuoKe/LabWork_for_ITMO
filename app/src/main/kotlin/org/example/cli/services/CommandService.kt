@@ -1,5 +1,6 @@
 package org.example.cli.services
 
+import org.example.auth.UserService
 import org.example.cli.handlers.*
 import org.example.service.*
 import org.example.storage.StorageService
@@ -9,6 +10,7 @@ class CommandService {
     internal val instrumentService = InstrumentService()
     internal val calibrationService = CalibrationService(instrumentService)
     internal val maintenanceService = MaintenanceService(instrumentService)
+    internal val userService = UserService()
 
     private val storageService = StorageService(
         instrumentService,
@@ -19,15 +21,21 @@ class CommandService {
     fun loadStartupData(path: String) = storageService.load(path)
 
     private val commands: Map<String, BaseHandler> = mapOf(
-        "inst_add"    to InstAddHandler(),
+        "inst_add"    to InstAddHandler(userService),
         "inst_list"   to InstListHandler(),
         "inst_show"   to InstShowHandler(calibrationService),
         "inst_update" to InstUpdateHandler(),
         "inst_due"    to InstDueHandler(calibrationService),
-        "cal_add"     to CalAddHandler(calibrationService),
+        "cal_add"     to CalAddHandler(
+            calibrationService,
+            userService
+        ),
         "cal_list"    to CalListHandler(calibrationService),
         "cal_show"    to CalShowHandler(calibrationService),
-        "maint_add"   to MaintAddHandler(maintenanceService),
+        "maint_add"   to MaintAddHandler(
+            maintenanceService,
+            userService
+        ),
         "maint_list"  to MaintListHandler(maintenanceService),
         "save"        to SaveHandler(storageService),
         "load"        to LoadHandler(storageService),

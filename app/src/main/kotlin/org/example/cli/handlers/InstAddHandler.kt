@@ -3,8 +3,9 @@ package org.example.cli.handlers
 import org.example.cli.services.ReaderService
 import org.example.service.InstrumentService
 import org.example.validation.InstrumentValidator
+import org.example.auth.UserService
 
-class InstAddHandler : BaseHandler {
+class InstAddHandler (private val userService: UserService): BaseHandler {
 
     private val reader = ReaderService()
 
@@ -33,7 +34,10 @@ class InstAddHandler : BaseHandler {
             val location = reader.readCommand().joinToString("")
             InstrumentValidator.validateLocation(location)
 
-            val instrument = instrumentService.add(name, type, inventory, location)
+            val instrument = instrumentService.add(
+                name, type, inventory, location,
+                userService.currentUsername
+            )
 
             println("OK instrument_id=${instrument.id}")
             true

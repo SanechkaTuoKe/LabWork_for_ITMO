@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import org.example.auth.UserService
-import org.example.ui.theme.*
 
 @Composable
 fun AuthView(
@@ -24,26 +23,38 @@ fun AuthView(
     var successMsg by remember { mutableStateOf<String?>(null) }
 
     Box(
-        modifier = Modifier.fillMaxSize().background(ColorBackground),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
         contentAlignment = Alignment.Center
     ) {
         Column(
             modifier = Modifier
                 .width(360.dp)
-                .background(ColorSurface)
+                .background(
+                    color = MaterialTheme.colorScheme.surface,
+                    shape = RoundedCornerShape(0.dp)
+                )
                 .padding(32.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 text = if (isRegisterMode) "Register" else "Login",
                 style = MaterialTheme.typography.titleLarge
             )
 
-            Divider(color = ColorDivider)
+            HorizontalDivider(
+                color = MaterialTheme.colorScheme.outline,
+                modifier = Modifier.fillMaxWidth()
+            )
 
             OutlinedTextField(
                 value = login,
-                onValueChange = { login = it; errorMsg = null },
+                onValueChange = {
+                    login = it
+                    errorMsg = null
+                },
                 label = { Text("Login") },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
@@ -52,7 +63,10 @@ fun AuthView(
 
             OutlinedTextField(
                 value = password,
-                onValueChange = { password = it; errorMsg = null },
+                onValueChange = {
+                    password = it
+                    errorMsg = null
+                },
                 label = { Text("Password") },
                 singleLine = true,
                 visualTransformation = PasswordVisualTransformation(),
@@ -60,43 +74,53 @@ fun AuthView(
                 shape = RoundedCornerShape(0.dp)
             )
 
-            if (errorMsg != null) {
-                Text(errorMsg!!, color = ColorError, style = MaterialTheme.typography.bodySmall)
-            }
-            if (successMsg != null) {
-                Text(successMsg!!, color = ColorPrimary, style = MaterialTheme.typography.bodySmall)
+            val error = errorMsg
+            if (error != null) {
+                Text(
+                    text = error,
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodySmall
+                )
             }
 
-            Row(
+            val success = successMsg
+            if (success != null) {
+                Text(
+                    text = success,
+                    color = MaterialTheme.colorScheme.primary,
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
+            Button(
+                onClick = {
+                    if (isRegisterMode) {
+                        userService.register(login, password)
+                            .onSuccess {
+                                successMsg = "Registered! Now login."
+                                isRegisterMode = false
+                                login = ""
+                                password = ""
+                            }
+                            .onFailure { errorMsg = it.message }
+                    } else {
+                        userService.login(login, password)
+                            .onSuccess { onAuthSuccess() }
+                            .onFailure { errorMsg = it.message }
+                    }
+                },
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                shape = RoundedCornerShape(0.dp),
+                enabled = login.isNotBlank() && password.isNotBlank()
             ) {
-                Button(
-                    onClick = {
-                        if (isRegisterMode) {
-                            userService.register(login, password)
-                                .onSuccess {
-                                    successMsg = "Registered! Now login."
-                                    isRegisterMode = false
-                                    login = ""; password = ""
-                                }
-                                .onFailure { errorMsg = it.message }
-                        } else {
-                            userService.login(login, password)
-                                .onSuccess { onAuthSuccess() }
-                                .onFailure { errorMsg = it.message }
-                        }
-                    },
-                    modifier = Modifier.weight(1f),
-                    shape = RoundedCornerShape(0.dp),
-                    enabled = login.isNotBlank() && password.isNotBlank()
-                ) {
-                    Text(if (isRegisterMode) "Register" else "Login")
-                }
+                Text(if (isRegisterMode) "Register" else "Login")
             }
 
             TextButton(
-                onClick = { isRegisterMode = !isRegisterMode; errorMsg = null; successMsg = null },
+                onClick = {
+                    isRegisterMode = !isRegisterMode
+                    errorMsg = null
+                    successMsg = null
+                },
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(

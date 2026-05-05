@@ -8,9 +8,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 
-val ColorPrimary     = Color(0xFF2B5278)
-val ColorPrimaryVar  = Color(0xFF1E3A52)
-val ColorSecondary   = Color(0xFF4A7FA5)
+val ColorPrimary     = Color(0xFFEA8FE7)
+val ColorPrimaryVar  = Color(0xFFBA92F3)
+val ColorSecondary   = Color(0xFF6FAEDB)
 val ColorBackground  = Color(0xFFF0F2F5)
 val ColorSurface     = Color(0xFFFFFFFF)
 val ColorSurfaceVar  = Color(0xFFE4E8EE)
@@ -19,11 +19,12 @@ val ColorOnSurface   = Color(0xFF1A1A2E)
 val ColorOnSurfaceVar= Color(0xFF4A5568)
 val ColorError       = Color(0xFFB91C1C)
 val ColorDivider     = Color(0xFFCBD5E1)
+val ColorPrimaryContainer = Color(0xFFD6E8F7)
 
 private val AppColorScheme = lightColorScheme(
     primary          = ColorPrimary,
     onPrimary        = ColorOnPrimary,
-    primaryContainer = Color(0xFFD6E8F7),
+    primaryContainer = ColorPrimaryContainer,
     secondary        = ColorSecondary,
     onSecondary      = ColorOnPrimary,
     background       = ColorBackground,
@@ -37,12 +38,12 @@ private val AppColorScheme = lightColorScheme(
 )
 
 private val AppTypography = Typography(
-    titleLarge  = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.SemiBold, color = ColorOnSurface),
-    titleMedium = TextStyle(fontSize = 15.sp, fontWeight = FontWeight.SemiBold, color = ColorOnSurface),
-    titleSmall  = TextStyle(fontSize = 13.sp, fontWeight = FontWeight.Medium,   color = ColorOnSurfaceVar),
-    bodyMedium  = TextStyle(fontSize = 13.sp, fontWeight = FontWeight.Normal,   color = ColorOnSurface),
-    bodySmall   = TextStyle(fontSize = 12.sp, fontWeight = FontWeight.Normal,   color = ColorOnSurfaceVar),
-    labelSmall  = TextStyle(fontSize = 11.sp, fontWeight = FontWeight.Medium,   color = ColorOnSurfaceVar)
+    titleLarge = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.SemiBold),
+    titleMedium = TextStyle(fontSize = 15.sp, fontWeight = FontWeight.SemiBold),
+    titleSmall = TextStyle(fontSize = 13.sp, fontWeight = FontWeight.Medium),
+    bodyMedium = TextStyle(fontSize = 13.sp, fontWeight = FontWeight.Normal),
+    bodySmall = TextStyle(fontSize = 12.sp, fontWeight = FontWeight.Normal),
+    labelSmall = TextStyle(fontSize = 11.sp, fontWeight = FontWeight.Medium,)
 )
 
 @Composable

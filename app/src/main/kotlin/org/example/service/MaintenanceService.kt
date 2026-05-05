@@ -16,7 +16,7 @@ class MaintenanceService(
         instrumentId: Long,
         type: MaintenanceType,
         details: String,
-        ownerUsername: String = "SYSTEM",
+        ownerUsername: String,
         doneAt: Instant = Instant.now()
     ): Maintenance {
         val instrument = instrumentService.getById(instrumentId)
@@ -59,6 +59,18 @@ class MaintenanceService(
         maintenances.clear()
         maintenances.putAll(loaded)
         nextId = if (loaded.isEmpty()) 1L else loaded.keys.max() + 1L
+    }
+
+    fun addExisting(maintenance: Maintenance) {
+        maintenances[maintenance.id] = maintenance
+        if (maintenance.id >= nextId) {
+            nextId = maintenance.id + 1
+        }
+    }
+
+    fun clearAll() {
+        maintenances.clear()
+        nextId = 1L
     }
 
     internal fun getAllMaintenances(): TreeMap<Long, Maintenance> = maintenances

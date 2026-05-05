@@ -5,37 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="854374bb-eed7-42f4-a74d-ca8fcde7fecf" name="Changes" comment="во время сдачи">
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/auth/User.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/auth/UserService.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/StorageService.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/InstrumentSaveLoad.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/storageValidation/InstrumentStorageValidator.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/auth/AuthView.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/DialogComponents.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/PathInputDialog.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/App.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/App.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/LoadHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/LoadHandler.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/SaveHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/SaveHandler.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/services/CommandService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/services/CommandService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/CalibrationService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/CalibrationService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/InstrumentService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/InstrumentService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/MaintenanceService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/MaintenanceService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/CalibrationSaveLoad.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/CalibrationSaveLoad.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/MaintenanceSaveLoad.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/MaintenanceSaveLoad.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/ServiceSaveLoad.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/ServiceSaveLoad.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/storageValidation/CalibrationStorageValidator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/storageValidation/CalibrationStorageValidator.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/storageValidation/MaintenanceStorageValidator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/storageValidation/MaintenanceStorageValidator.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/storageValidation/ServiceStorageValidator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/storageValidation/StorageValidator.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/MainView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/MainView.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/InstrumentController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/InstrumentController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/InstrumentDetailView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/InstrumentDetailView.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/InstrumentMasterView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/InstrumentMasterView.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/AddInstrumentDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/AddInstrumentDialog.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/CalibrationDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/CalibrationDialog.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/EditInstrumentDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/EditInstrumentDialog.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/MaintenanceDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/MaintenanceDialog.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/theme/AppTheme.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/theme/AppTheme.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/FilePickerDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/FilePickerDialog.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +91,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="step-4-only" />
+        <entry key="$PROJECT_DIR$" value="corrections-andstep5" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -145,36 +119,39 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Load Gradle Dependencies.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PuTao [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PuTao [jar].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PuTao [kotlinSourcesJar].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PuTao [run].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PuTao:app [:app:org.example.AppKt.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.PuTao:app [run].executor&quot;: &quot;Run&quot;,
-    &quot;Kotlin.AppKt.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;corrections-andstep5&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Projects/PuTao&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Gradle.Download Sources.executor": "Run",
+    "Gradle.Load Gradle Dependencies.executor": "Run",
+    "Gradle.PuTao [clean].executor": "Run",
+    "Gradle.PuTao [jar].executor": "Run",
+    "Gradle.PuTao [kotlinSourcesJar].executor": "Run",
+    "Gradle.PuTao [run].executor": "Run",
+    "Gradle.PuTao:app [:app:org.example.AppKt.main()].executor": "Run",
+    "Gradle.PuTao:app [run].executor": "Run",
+    "Kotlin.AppKt.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "fixes-and-mini",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/User/Projects/PuTao",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CreateKotlinClassDialog.RecentsKey">
+      <recent name="org.example.ui.instruments.dialogs" />
+    </key>
     <key name="K2MoveDeclarationsDialog.RECENT_PACKAGE_KEY">
       <recent name="org.example.Storage.saveLoad" />
       <recent name="org.example.cli.handlers" />
@@ -408,7 +385,127 @@
       <option name="project" value="LOCAL" />
       <updated>1776799433253</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="исправлен формат кода">
+      <option name="closed" value="true" />
+      <created>1776956569578</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1776956569578</updated>
+    </task>
+    <task id="LOCAL-00014" summary="испр">
+      <option name="closed" value="true" />
+      <created>1776956651599</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1776956651599</updated>
+    </task>
+    <task id="LOCAL-00015" summary="перенос строки">
+      <option name="closed" value="true" />
+      <created>1776956674602</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1776956674602</updated>
+    </task>
+    <task id="LOCAL-00016" summary="глобально я поменяла расположение блоков потому что из-за этого весь интерфейс поехал, код тот же">
+      <option name="closed" value="true" />
+      <created>1777029923997</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1777029923997</updated>
+    </task>
+    <task id="LOCAL-00017" summary="исправлено сохранение по методичке">
+      <option name="closed" value="true" />
+      <created>1777032278677</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1777032278677</updated>
+    </task>
+    <task id="LOCAL-00018" summary="codestyle">
+      <option name="closed" value="true" />
+      <created>1777032294715</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1777032294715</updated>
+    </task>
+    <task id="LOCAL-00019" summary=":(">
+      <option name="closed" value="true" />
+      <created>1777034353153</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1777034353153</updated>
+    </task>
+    <task id="LOCAL-00020" summary="более понятный для меня вариант">
+      <option name="closed" value="true" />
+      <created>1777063920453</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1777063920453</updated>
+    </task>
+    <task id="LOCAL-00021" summary=":(">
+      <option name="closed" value="true" />
+      <created>1777063935749</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1777063935749</updated>
+    </task>
+    <task id="LOCAL-00022" summary="чтобы был исходник">
+      <option name="closed" value="true" />
+      <created>1777064475580</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1777064475580</updated>
+    </task>
+    <task id="LOCAL-00023" summary="то, что до начала работы под логином (поменяла название объекта)">
+      <option name="closed" value="true" />
+      <created>1777064514669</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1777064514669</updated>
+    </task>
+    <task id="LOCAL-00024" summary="проверить, работает ли кли, потом вообще все удалить">
+      <option name="closed" value="true" />
+      <created>1777066349975</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1777066349975</updated>
+    </task>
+    <task id="LOCAL-00025" summary="нормальные цвета">
+      <option name="closed" value="true" />
+      <created>1777067045478</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1777067045478</updated>
+    </task>
+    <task id="LOCAL-00026" summary="цвет">
+      <option name="closed" value="true" />
+      <created>1777067056996</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1777067056996</updated>
+    </task>
+    <task id="LOCAL-00027" summary="цвет">
+      <option name="closed" value="true" />
+      <created>1777067065163</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1777067065163</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -434,22 +531,19 @@
     <MESSAGE value="упрощена часть сохранения" />
     <MESSAGE value="исправила обновления" />
     <MESSAGE value="во время сдачи" />
-    <option name="LAST_COMMIT_MESSAGE" value="во время сдачи" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/MaintAddHandler.kt</url>
-          <line>25</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/MaintAddHandler.kt</url>
-          <line>30</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="исправлен формат кода" />
+    <MESSAGE value="испр" />
+    <MESSAGE value="перенос строки" />
+    <MESSAGE value="глобально я поменяла расположение блоков потому что из-за этого весь интерфейс поехал, код тот же" />
+    <MESSAGE value="исправлено сохранение по методичке" />
+    <MESSAGE value="codestyle" />
+    <MESSAGE value="более понятный для меня вариант" />
+    <MESSAGE value=":(" />
+    <MESSAGE value="чтобы был исходник" />
+    <MESSAGE value="то, что до начала работы под логином (поменяла название объекта)" />
+    <MESSAGE value="проверить, работает ли кли, потом вообще все удалить" />
+    <MESSAGE value="нормальные цвета" />
+    <MESSAGE value="цвет" />
+    <option name="LAST_COMMIT_MESSAGE" value="цвет" />
   </component>
 </project>
