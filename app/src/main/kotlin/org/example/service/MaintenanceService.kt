@@ -60,4 +60,5 @@ class MaintenanceService(
     fun removeByInstrumentId(instrumentId: Long) {
         maintenances.entries.removeIf { it.value.instrumentId == instrumentId }
     }
+    internal fun getAllMaintenances(): TreeMap<Long, Maintenance> = maintenances
 }

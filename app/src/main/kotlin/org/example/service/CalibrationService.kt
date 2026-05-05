@@ -56,11 +56,13 @@ class CalibrationService(
         require(instrumentService.getById(instrumentId) != null) {
             "Instrument with id=$instrumentId not found"
         }
-
+val Abcd = ::getById
         val list: List<Calibration> = calibrations.values
             .asSequence()
-            .filter { it.instrumentId == instrumentId }
-            .sortedByDescending { it.calibratedAt }
+            .filter(fun(it: Calibration): Boolean {
+                return it.instrumentId == instrumentId
+            })
+            .sortedByDescending { a -> a.calibratedAt }
             .toList()
 
         return if (last != null && last > 0) list.take(last) else list
@@ -69,4 +71,5 @@ class CalibrationService(
     fun removeByInstrumentId(instrumentId: Long) {
         calibrations.entries.removeIf { it.value.instrumentId == instrumentId }
     }
+    internal fun getAllCalibrations(): TreeMap<Long, Calibration> = calibrations
 }

@@ -95,4 +95,5 @@ class InstrumentService {
     }
 
     fun exists(id: Long): Boolean = instruments.containsKey(id)
+    internal fun getAllInstruments(): TreeMap<Long, Instrument> = instruments
 }
