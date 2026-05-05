@@ -8,7 +8,6 @@ import java.util.*
 class CalibrationService(
     private val instrumentService: InstrumentService
 ) {
-
     private val calibrations = TreeMap<Long, Calibration>()
     private var nextId = 1L
 
@@ -20,13 +19,10 @@ class CalibrationService(
         ownerUsername: String = "SYSTEM",
         calibratedAt: Instant = Instant.now()
     ): Calibration {
-
         val instrument = instrumentService.getById(instrumentId)
             ?: throw IllegalArgumentException("Instrument with id=$instrumentId not found")
-
-        if (instrument.status != InstrumentStatus.ACTIVE) {
+        if (instrument.status != InstrumentStatus.ACTIVE)
             throw IllegalArgumentException("Instrument is not ACTIVE")
-        }
 
         val type = CalibrationValidator.validateType(typeInput)
         val result = CalibrationValidator.validateResult(resultInput)
@@ -42,33 +38,35 @@ class CalibrationService(
             ownerUsername = ownerUsername,
             createdAt = Instant.now()
         )
-
         calibrations[calibration.id] = calibration
         return calibration
     }
 
     fun getById(id: Long): Calibration =
-        calibrations[id]
-            ?: throw NoSuchElementException("Calibration with id=$id not found")
+        calibrations[id] ?: throw NoSuchElementException("Calibration with id=$id not found")
+
+    fun getAll(): List<Calibration> = calibrations.values.toList()
 
     fun listByInstrument(instrumentId: Long, last: Int? = null): List<Calibration> {
-
         require(instrumentService.getById(instrumentId) != null) {
             "Instrument with id=$instrumentId not found"
         }
-        val list: List<Calibration> = calibrations.values
-            .asSequence()
-            .filter(fun(it: Calibration): Boolean {
-                return it.instrumentId == instrumentId
-            })
-            .sortedByDescending { a -> a.calibratedAt }
-            .toList()
-
+        val list = calibrations.values
+            .filter { it.instrumentId == instrumentId }
+            .sortedByDescending { it.calibratedAt }
         return if (last != null && last > 0) list.take(last) else list
     }
 
     fun removeByInstrumentId(instrumentId: Long) {
         calibrations.entries.removeIf { it.value.instrumentId == instrumentId }
     }
+
+    /** Загружает коллекцию из файла, пересчитывает nextId. */
+    fun loadAll(loaded: Map<Long, Calibration>) {
+        calibrations.clear()
+        calibrations.putAll(loaded)
+        nextId = if (loaded.isEmpty()) 1L else loaded.keys.max() + 1L
+    }
+
     internal fun getAllCalibrations(): TreeMap<Long, Calibration> = calibrations
 }

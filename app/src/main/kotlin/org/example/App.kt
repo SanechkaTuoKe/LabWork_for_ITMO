@@ -1,47 +1,36 @@
 package org.example
 
+import androidx.compose.runtime.*
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import androidx.compose.ui.unit.dp
-import org.example.cli.services.CommandService
-import org.example.cli.services.LoopService
-import org.example.ui.MainView
-import org.example.ui.theme.AppTheme
-import kotlin.concurrent.thread
+import org.example.auth.UserService
+import org.example.service.CalibrationService
+import org.example.service.InstrumentService
+import org.example.service.MaintenanceService
+import org.example.ui.MainScreen
+import org.example.ui.theme.EquipmentAppTheme
 
-fun main(args: Array<String>) {
-    println("Starting Equipment Manager...")
-    val commandService = CommandService()
-
-    if (args.isNotEmpty()) {
-        try {
-            commandService.loadStartupData(args[0])
-            println("Loaded data from: ${args[0]}")
-        } catch (e: Exception) {
-            println("Error loading data: ${e.message}")
-        }
-    }
-
-    val loopService = LoopService(commandService)
-
-    val cliThread = thread(start = true, isDaemon = true) {
-        println("CLI ready. Type 'help' for available commands.")
-        loopService.loopOfCommands()
-    }
+fun main() {
+    val userService = UserService()
+    val instrumentService = InstrumentService()
+    val calibrationService = CalibrationService(instrumentService)
+    val maintenanceService = MaintenanceService(instrumentService)
 
     application {
         Window(
-            onCloseRequest = {
-                println("UI window closed. Console still running.")
-                println("Type 'exit' in console to quit completely.")
-                this::exitApplication
-            },
+            onCloseRequest = ::exitApplication,
             title = "Equipment Manager",
-            state = rememberWindowState(width = 1100.dp, height = 700.dp)
+            state = rememberWindowState(width = 1200.dp, height = 760.dp)
         ) {
-            AppTheme {
-                MainView(commandService = commandService)
+            EquipmentAppTheme {
+                MainScreen(
+                    userService = userService,
+                    instrumentService = instrumentService,
+                    calibrationService = calibrationService,
+                    maintenanceService = maintenanceService
+                )
             }
         }
     }

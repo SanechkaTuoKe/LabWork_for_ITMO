@@ -6,34 +6,20 @@ import org.example.storage.StorageService
 class LoadHandler(
     private val storageService: StorageService
 ) : BaseHandler {
-
     override fun handle(
         params: List<String>,
         instrumentService: InstrumentService,
         allHandlers: Collection<BaseHandler>
     ): Boolean {
-
-        if (params.size != 1) {
-            println("Usage: load <directory>")
-            return true
-        }
-
-        val path = params[0]
-
-        try {
-            storageService.load(path)
-            println("✔ Data successfully loaded from: $path")
-        } catch (e: IllegalArgumentException) {
-            println("Load error:")
-            println(e.message)
+        if (params.size != 1) { println("Usage: load <directory>"); return true }
+        return try {
+            storageService.load(params[0])
+            println("✔ Loaded from: ${params[0]}")
+            true
         } catch (e: Exception) {
-            println("Unexpected error during load: ${e.message}")
+            println("Load error: ${e.message}")
+            true
         }
-
-        return true
     }
-
-    override fun help(): String {
-        return "load <directory> - load data from files (replaces current data)"
-    }
+    override fun help() = "load <directory> - load data from files"
 }
