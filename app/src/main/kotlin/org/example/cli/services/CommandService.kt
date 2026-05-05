@@ -46,4 +46,7 @@ class CommandService {
             println("Error: command not found: $cmd"); true
         }
     }
+
+    fun loopOfCommands() {
+    }
 }
