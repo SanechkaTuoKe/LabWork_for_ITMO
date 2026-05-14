@@ -4,9 +4,10 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
+import org.example.storage.AppData
 
 class UserService(
-    private val usersFilePath: Path = Paths.get("users.csv")
+    private val usersFilePath: Path = AppData.resolve("users.csv")
 ) {
     private val users = mutableMapOf<String, User>()
     var currentUser: User? = null

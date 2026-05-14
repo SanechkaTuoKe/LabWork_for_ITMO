@@ -4,6 +4,7 @@ import org.example.domain.Instrument
 import org.example.domain.InstrumentStatus
 import org.example.domain.InstrumentType
 import java.nio.file.Path
+import org.example.storage.AppData
 import java.time.Instant
 
 object InstrumentSaveLoad {

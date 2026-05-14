@@ -29,7 +29,7 @@ fun FilePickerDialog(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    "Select a folder to continue.",
+                    "Select a folder",
                     style = MaterialTheme.typography.bodyMedium
                 )
 
@@ -80,4 +80,4 @@ fun FilePickerDialog(
             }
         }
     )
-}//глобально - нельзя больше напечатать путь руками, только выбрать
+}

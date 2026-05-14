@@ -4,6 +4,7 @@ import org.example.domain.Maintenance
 import org.example.domain.MaintenanceType
 import java.nio.file.Path
 import java.time.Instant
+import org.example.storage.AppData
 
 object MaintenanceSaveLoad {
     fun create(filePath: Path): SaveLoad<Maintenance, Long> {
@@ -27,7 +28,6 @@ object MaintenanceSaveLoad {
                 val type = MaintenanceType.valueOf(data["type"] ?: "REPAIR")
                 val details = data["details"] ?: ""
                 val doneAt = Instant.parse(data["doneAt"] ?: return@fromMap null)
-                // ownerUsername теперь читается из data, а не из воздуха
                 val ownerUsername = data["ownerUsername"] ?: "SYSTEM"
                 val createdAt = Instant.parse(data["createdAt"] ?: return@fromMap null)
 

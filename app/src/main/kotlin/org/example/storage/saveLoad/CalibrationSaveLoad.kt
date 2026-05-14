@@ -5,6 +5,8 @@ import org.example.domain.CalibrationResult
 import org.example.domain.CalibrationType
 import java.nio.file.Path
 import java.time.Instant
+import org.example.storage.AppData
+
 
 object CalibrationSaveLoad {
     fun create(filePath: Path): SaveLoad<Calibration, Long> {

@@ -29,11 +29,9 @@ class StorageService(
             .save(maintenanceService.getAll())
     }
 
-    fun load(directory: String) {
+    fun load(directory: String) { //отладка?
         val dir = Paths.get(directory)
         val errors = mutableListOf<String>()
-
-        // --- Загружаем инструменты ---
         val loadedInstruments = InstrumentSaveLoad.create(dir.resolve("instruments.csv")).load()
         loadedInstruments.values.forEach { inst ->
             val err = InstrumentStorageValidator.validate(inst)
