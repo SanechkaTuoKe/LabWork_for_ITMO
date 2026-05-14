@@ -3,42 +3,53 @@ package org.example.storage.saveLoad
 import org.example.domain.Instrument
 import org.example.domain.InstrumentStatus
 import org.example.domain.InstrumentType
-import java.nio.file.Path
-import org.example.storage.AppData
+import java.sql.Connection
+import java.sql.Timestamp
 import java.time.Instant
 
 object InstrumentSaveLoad {
-    fun create(filePath: Path): SaveLoad<Instrument, Long> {
-        return ServiceSaveLoad(
-            filePath,
-            listOf("id", "name", "type", "inventoryNumber", "location", "status", "ownerUsername", "createdAt", "updatedAt"),
-            toMap = { inst ->
+    fun create(connection: Connection): DatabaseSaveLoad<Instrument, Long> {
+        return DatabaseSaveLoad(
+            connection = connection,
+            tableName = "instruments",
+            idColumn = "id",
+            columns = listOf(
+                "id", "name", "type", "inventory_number", "location",
+                "status", "owner_username", "created_at", "updated_at"
+            ),
+            toRow = { inst ->
                 mapOf(
-                    "id" to inst.id.toString(),
+                    "id" to inst.id,
                     "name" to inst.name,
                     "type" to inst.type.name,
-                    "inventoryNumber" to (inst.inventoryNumber ?: ""),
+                    "inventory_number" to (inst.inventoryNumber ?: ""),
                     "location" to inst.location,
                     "status" to inst.status.name,
-                    "ownerUsername" to inst.ownerUsername,
-                    "createdAt" to inst.createdAt.toString(),
-                    "updatedAt" to inst.updatedAt.toString()
-                ) as Map<String, String>
+                    "owner_username" to (inst.ownerUsername ?: ""),
+                    "created_at" to Timestamp.from(inst.createdAt),
+                    "updated_at" to Timestamp.from(inst.updatedAt)
+                )
             },
-            fromMap = fromMap@{ d ->
+            fromRow = { row ->
                 try {
                     Instrument(
-                        id = d["id"]?.toLong() ?: return@fromMap null,
-                        name = d["name"] ?: return@fromMap null,
-                        type = InstrumentType.valueOf(d["type"] ?: return@fromMap null),
-                        inventoryNumber = d["inventoryNumber"]?.takeIf { it.isNotBlank() },
-                        location = d["location"] ?: return@fromMap null,
-                        status = InstrumentStatus.valueOf(d["status"] ?: "ACTIVE"),
-                        ownerUsername = d["ownerUsername"] ?: "SYSTEM",
-                        createdAt = Instant.parse(d["createdAt"] ?: return@fromMap null),
-                        updatedAt = Instant.parse(d["updatedAt"] ?: return@fromMap null)
+                        id = (row["id"] as? Number)?.toLong() ?: return@DatabaseSaveLoad null,
+                        name = row["name"] as? String ?: return@DatabaseSaveLoad null,
+                        type = InstrumentType.valueOf(
+                            row["type"] as? String ?: return@DatabaseSaveLoad null
+                        ),
+                        inventoryNumber = (row["inventory_number"] as? String)?.takeIf { it.isNotBlank() },
+                        location = row["location"] as? String ?: return@DatabaseSaveLoad null,
+                        status = InstrumentStatus.valueOf(
+                            row["status"] as? String ?: "ACTIVE"
+                        ),
+                        ownerUsername = (row["owner_username"] as? String)?.takeIf { it.isNotBlank() },
+                        createdAt = (row["created_at"] as? Timestamp)?.toInstant() ?: Instant.now(),
+                        updatedAt = (row["updated_at"] as? Timestamp)?.toInstant() ?: Instant.now()
                     )
-                } catch (e: Exception) { null }
+                } catch (e: Exception) {
+                    null
+                }
             },
             extractId = { it.id }
         )

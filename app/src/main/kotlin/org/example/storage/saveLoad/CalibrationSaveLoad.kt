@@ -3,41 +3,53 @@ package org.example.storage.saveLoad
 import org.example.domain.Calibration
 import org.example.domain.CalibrationResult
 import org.example.domain.CalibrationType
-import java.nio.file.Path
+import java.sql.Connection
+import java.sql.Timestamp
 import java.time.Instant
-import org.example.storage.AppData
-
 
 object CalibrationSaveLoad {
-    fun create(filePath: Path): SaveLoad<Calibration, Long> {
-        return ServiceSaveLoad(
-            filePath,
-            listOf("id", "instrumentId", "type", "result", "comment", "calibratedAt", "ownerUsername", "createdAt"),
-            toMap = { cal ->
+    fun create(connection: Connection): DatabaseSaveLoad<Calibration, Long> {
+        return DatabaseSaveLoad(
+            connection = connection,
+            tableName = "calibrations",
+            idColumn = "id",
+            columns = listOf(
+                "id", "instrument_id", "type", "result", "comment",
+                "calibrated_at", "owner_username", "created_at"
+            ),
+            toRow = { cal ->
                 mapOf(
-                    "id" to cal.id.toString(),
-                    "instrumentId" to cal.instrumentId.toString(),
+                    "id" to cal.id,
+                    "instrument_id" to cal.instrumentId,
                     "type" to cal.type.name,
                     "result" to cal.result.name,
-                    "comment" to (cal.comment ?: ""),
-                    "calibratedAt" to cal.calibratedAt.toString(),
-                    "ownerUsername" to cal.ownerUsername,
-                    "createdAt" to cal.createdAt.toString()
+                    "comment" to cal.comment,
+                    "calibrated_at" to Timestamp.from(cal.calibratedAt),
+                    "owner_username" to cal.ownerUsername,
+                    "created_at" to Timestamp.from(cal.createdAt)
                 )
             },
-            fromMap = fromMap@{ d ->
+            fromRow = { row ->
                 try {
                     Calibration(
-                        id = d["id"]?.toLong() ?: return@fromMap null,
-                        instrumentId = d["instrumentId"]?.toLong() ?: return@fromMap null,
-                        type = CalibrationType.valueOf(d["type"] ?: return@fromMap null),
-                        result = CalibrationResult.valueOf(d["result"] ?: return@fromMap null),
-                        comment = d["comment"]?.takeIf { it.isNotBlank() } ?: "",
-                        calibratedAt = Instant.parse(d["calibratedAt"] ?: return@fromMap null),
-                        ownerUsername = d["ownerUsername"] ?: "SYSTEM",
-                        createdAt = Instant.parse(d["createdAt"] ?: return@fromMap null)
+                        id = (row["id"] as? Number)?.toLong() ?: return@DatabaseSaveLoad null,
+                        instrumentId = (row["instrument_id"] as? Number)?.toLong()
+                            ?: return@DatabaseSaveLoad null,
+                        type = CalibrationType.valueOf(
+                            row["type"] as? String ?: return@DatabaseSaveLoad null
+                        ),
+                        result = CalibrationResult.valueOf(
+                            row["result"] as? String ?: return@DatabaseSaveLoad null
+                        ),
+                        comment = row["comment"] as? String ?: "",
+                        calibratedAt = (row["calibrated_at"] as? Timestamp)?.toInstant()
+                            ?: return@DatabaseSaveLoad null,
+                        ownerUsername = row["owner_username"] as? String ?: "SYSTEM",
+                        createdAt = (row["created_at"] as? Timestamp)?.toInstant() ?: Instant.now()
                     )
-                } catch (e: Exception) { null }
+                } catch (e: Exception) {
+                    null
+                }
             },
             extractId = { it.id }
         )

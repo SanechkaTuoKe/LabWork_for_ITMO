@@ -2,44 +2,49 @@ package org.example.storage.saveLoad
 
 import org.example.domain.Maintenance
 import org.example.domain.MaintenanceType
-import java.nio.file.Path
+import java.sql.Connection
+import java.sql.Timestamp
 import java.time.Instant
-import org.example.storage.AppData
 
 object MaintenanceSaveLoad {
-    fun create(filePath: Path): SaveLoad<Maintenance, Long> {
-        return ServiceSaveLoad(
-            filePath = filePath,
-            headers = listOf("id", "instrumentId", "type", "details", "doneAt", "ownerUsername", "createdAt"),
-            toMap = { m ->
+    fun create(connection: Connection): DatabaseSaveLoad<Maintenance, Long> {
+        return DatabaseSaveLoad(
+            connection = connection,
+            tableName = "maintenances",
+            idColumn = "id",
+            columns = listOf(
+                "id", "instrument_id", "type", "details", "done_at",
+                "owner_username", "created_at"
+            ),
+            toRow = { m ->
                 mapOf(
-                    "id" to m.id.toString(),
-                    "instrumentId" to m.instrumentId.toString(),
+                    "id" to m.id,
+                    "instrument_id" to m.instrumentId,
                     "type" to m.type.name,
                     "details" to m.details,
-                    "doneAt" to m.doneAt.toString(),
-                    "ownerUsername" to m.ownerUsername,
-                    "createdAt" to m.createdAt.toString()
+                    "done_at" to Timestamp.from(m.doneAt),
+                    "owner_username" to m.ownerUsername,
+                    "created_at" to Timestamp.from(m.createdAt)
                 )
             },
-            fromMap = fromMap@{ data ->
-                val id = data["id"]?.toLongOrNull() ?: return@fromMap null
-                val instrumentId = data["instrumentId"]?.toLongOrNull() ?: return@fromMap null
-                val type = MaintenanceType.valueOf(data["type"] ?: "REPAIR")
-                val details = data["details"] ?: ""
-                val doneAt = Instant.parse(data["doneAt"] ?: return@fromMap null)
-                val ownerUsername = data["ownerUsername"] ?: "SYSTEM"
-                val createdAt = Instant.parse(data["createdAt"] ?: return@fromMap null)
-
-                Maintenance(
-                    id = id,
-                    instrumentId = instrumentId,
-                    type = type,
-                    details = details,
-                    doneAt = doneAt,
-                    ownerUsername = ownerUsername,
-                    createdAt = createdAt
-                )
+            fromRow = { row ->
+                try {
+                    Maintenance(
+                        id = (row["id"] as? Number)?.toLong() ?: return@DatabaseSaveLoad null,
+                        instrumentId = (row["instrument_id"] as? Number)?.toLong()
+                            ?: return@DatabaseSaveLoad null,
+                        type = MaintenanceType.valueOf(
+                            row["type"] as? String ?: "REPAIR"
+                        ),
+                        details = row["details"] as? String ?: "",
+                        doneAt = (row["done_at"] as? Timestamp)?.toInstant()
+                            ?: return@DatabaseSaveLoad null,
+                        ownerUsername = row["owner_username"] as? String ?: "SYSTEM",
+                        createdAt = (row["created_at"] as? Timestamp)?.toInstant() ?: Instant.now()
+                    )
+                } catch (e: Exception) {
+                    null
+                }
             },
             extractId = { it.id }
         )

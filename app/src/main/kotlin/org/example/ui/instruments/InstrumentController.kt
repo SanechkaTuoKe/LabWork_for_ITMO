@@ -5,15 +5,12 @@ import kotlinx.coroutines.*
 import org.example.auth.UserService
 import org.example.domain.*
 import org.example.service.*
-import org.example.storage.StorageService
-import java.io.File
 import java.time.Instant
 
 class InstrumentController(
     val instrumentService: InstrumentService,
     val calibrationService: CalibrationService,
     val maintenanceService: MaintenanceService,
-    val storageService: StorageService,
     val userService: UserService
 ) {
 
@@ -195,32 +192,6 @@ class InstrumentController(
                 maintenanceUpdateCounter.value++
                 status.value = "Maintenance added"
             } catch (e: Exception) {
-                error.value = e.message
-            }
-        }
-    }
-
-    fun save(path: String) {
-        scope.launch {
-            try {
-                storageService.save(path)
-                status.value = "Saved to $path"
-            } catch (e: Exception) {
-                error.value = e.message
-            }
-        }
-    }
-
-    fun load(path: String) {
-        scope.launch {
-            try {
-                println("=== CONTROLLER LOAD: $path ===")
-                storageService.load(path)
-                refresh()
-                status.value = "Loaded from $path"
-            } catch (e: Exception) {
-                println("Load error: ${e.message}")
-                e.printStackTrace()
                 error.value = e.message
             }
         }

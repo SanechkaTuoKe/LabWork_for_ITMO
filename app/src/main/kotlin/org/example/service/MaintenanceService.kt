@@ -1,16 +1,35 @@
 package org.example.service
 
+import org.example.storage.saveLoad.InstrumentSaveLoad
+import java.sql.Connection
 import org.example.domain.Maintenance
 import org.example.domain.MaintenanceType
 import org.example.validation.MaintenanceValidator
 import java.time.Instant
 import java.util.*
+import org.example.storage.saveLoad.MaintenanceSaveLoad
 
 class MaintenanceService(
-    private val instrumentService: InstrumentService
+    private val instrumentService: InstrumentService,
+    private val connection: Connection? = null  // ← это нужно добавить
 ) {
     private val maintenances = TreeMap<Long, Maintenance>()
     private var nextId = 1L
+    private val dbStorage = connection?.let { MaintenanceSaveLoad.create(it) }
+    init {
+        connection?.let {
+            loadFromDatabase()
+        }
+    }
+
+    private fun loadFromDatabase() {
+        dbStorage?.let { storage ->
+            val loaded = storage.load()
+            maintenances.clear()
+            maintenances.putAll(loaded)
+            nextId = if (loaded.isEmpty()) 1L else loaded.keys.max() + 1L
+        }
+    }
 
     fun add(
         instrumentId: Long,
@@ -23,6 +42,31 @@ class MaintenanceService(
             ?: throw IllegalArgumentException("Instrument with id=$instrumentId not found")
         val validatedDetails = MaintenanceValidator.validateDetails(details)
 
+        if (dbStorage != null) {
+            val tempMaintenance = Maintenance(
+                id = 0,
+                instrumentId = instrument.id,
+                type = type,
+                details = validatedDetails,
+                doneAt = doneAt,
+                ownerUsername = ownerUsername,
+                createdAt = Instant.now()
+            )
+            val generatedId = dbStorage!!.insert(tempMaintenance)
+            if (generatedId != null) {
+                val maintenance = Maintenance(
+                    id = generatedId,
+                    instrumentId = tempMaintenance.instrumentId,
+                    type = tempMaintenance.type,
+                    details = tempMaintenance.details,
+                    doneAt = tempMaintenance.doneAt,
+                    ownerUsername = tempMaintenance.ownerUsername,
+                    createdAt = tempMaintenance.createdAt
+                )
+                maintenances[maintenance.id] = maintenance
+                return maintenance
+            }
+        }
         val maintenance = Maintenance(
             id = nextId++,
             instrumentId = instrument.id,
@@ -52,6 +96,11 @@ class MaintenanceService(
     }
 
     fun removeByInstrumentId(instrumentId: Long) {
+        dbStorage?.let { storage ->
+            maintenances.values.filter { it.instrumentId == instrumentId }.forEach {
+                storage.delete(it.id)
+            }
+        }
         maintenances.entries.removeIf { it.value.instrumentId == instrumentId }
     }
 

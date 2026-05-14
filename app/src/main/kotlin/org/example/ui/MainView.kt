@@ -22,7 +22,6 @@ import org.example.ui.instruments.InstrumentMasterView
 import org.example.ui.instruments.dialogs.AddInstrumentDialog
 import org.example.ui.instruments.dialogs.CalibrationDialog
 import org.example.ui.instruments.dialogs.EditInstrumentDialog
-import org.example.ui.instruments.dialogs.FilePickerDialog
 import org.example.ui.instruments.dialogs.MaintenanceDialog
 import java.time.Instant
 
@@ -50,8 +49,6 @@ fun MainScreen(
     var showEdit by remember { mutableStateOf(false) }
     var showCal by remember { mutableStateOf(false) }
     var showMaint by remember { mutableStateOf(false) }
-    var showSave by remember { mutableStateOf(false) }
-    var showLoad by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -74,8 +71,6 @@ fun MainScreen(
 
             Button(onClick = { controller.refresh() }) { Text("Refresh") }
             Button(onClick = { showAdd = true }) { Text("Add") }
-            Button(onClick = { showSave = true }) { Text("Save") }
-            Button(onClick = { showLoad = true }) { Text("Load") }
 
             Spacer(Modifier.weight(1f))
 
@@ -228,28 +223,4 @@ fun MainScreen(
             )
         }
     }
-
-    if (showSave) {
-        FilePickerDialog(
-            title = "Save",
-            confirmLabel = "Save",
-            onConfirm = { path ->
-                controller.save(path)
-                showSave = false
-            },
-            onDismiss = { showSave = false },
-        )
-    }
-
-    if (showLoad) {
-        FilePickerDialog(
-            title = "Load",
-            confirmLabel = "Load",
-            onConfirm = { path ->
-                controller.load(path)
-                showLoad = false
-            },
-            onDismiss = { showLoad = false }
-        )
-    }
-}//цвета
+}

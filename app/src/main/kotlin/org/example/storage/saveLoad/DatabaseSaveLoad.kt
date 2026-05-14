@@ -48,7 +48,8 @@ class DatabaseSaveLoad<T, ID : Any>(
                     while (rs.next()) {
                         val row = mutableMapOf<String, Any?>()
                         for (i in 1..metaData.columnCount) {
-                            row[metaData.getColumnName(i).lowercase()] = rs.getObject(i)
+                            val raw = rs.getObject(i)
+                            row[metaData.getColumnName(i).lowercase()] = convertValue(raw)
                         }
                         val entity = fromRow(row) ?: continue
                         result[extractId(entity)] = entity
@@ -87,8 +88,9 @@ class DatabaseSaveLoad<T, ID : Any>(
                 }
                 ps.executeQuery().use { rs ->
                     if (rs.next()) {
+                        val generatedId = convertValue(rs.getObject(1))
                         @Suppress("UNCHECKED_CAST")
-                        return rs.getObject(1) as? ID
+                        return generatedId as? ID
                     }
                 }
             }
@@ -133,6 +135,14 @@ class DatabaseSaveLoad<T, ID : Any>(
             } else {
                 throw RuntimeException("Database error: ${e.message}", e)
             }
+        }
+    }
+
+    private fun convertValue(value: Any?): Any? {
+        return when (value) {
+            is java.math.BigDecimal -> value.toLong()
+            is java.math.BigInteger -> value.toLong()
+            else -> value
         }
     }
 }

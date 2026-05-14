@@ -10,14 +10,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="854374bb-eed7-42f4-a74d-ca8fcde7fecf" name="Changes" comment="во время сдачи">
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/DatabaseConfig.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/DatabaseSaveLoad.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/test/resources/database.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.zip" beforeDir="false" afterPath="$PROJECT_DIR$/app.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/auth/UserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/auth/UserService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/domain/Instrument.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/domain/Instrument.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/App.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/App.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/BaseHandler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/CalAddHandler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/CalListHandler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/CalShowHandler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/ErrorHandler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/ExitHandler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/HelpHandler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/InstAddHandler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/InstDueHandler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/InstListHandler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/InstShowHandler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/InstUpdateHandler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/LoadHandler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/MaintAddHandler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/MaintListHandler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/SaveHandler.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/services/CommandService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/services/LoopService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/services/ReaderService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/util/Param.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/CalibrationService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/CalibrationService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/InstrumentService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/InstrumentService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/MaintenanceService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/MaintenanceService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/StorageService.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/CalibrationSaveLoad.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/CalibrationSaveLoad.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/InstrumentSaveLoad.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/InstrumentSaveLoad.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/MaintenanceSaveLoad.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/MaintenanceSaveLoad.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/MainView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/MainView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/InstrumentController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/InstrumentController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/resources/database.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/resources/database.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +160,7 @@
     "Gradle.PuTao [jar].executor": "Run",
     "Gradle.PuTao [kotlinSourcesJar].executor": "Run",
     "Gradle.PuTao [packageUberJarForCurrentOS].executor": "Run",
-    "Gradle.PuTao [run].executor": "Debug",
+    "Gradle.PuTao [run].executor": "Run",
     "Gradle.PuTao:app [:app:org.example.AppKt.main()].executor": "Run",
     "Gradle.PuTao:app [run].executor": "Run",
     "Kotlin.AppKt.executor": "Run",
@@ -170,7 +194,7 @@
       <recent name="org.example.CLI.handlers" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.PuTao [packageUberJarForCurrentOS]">
+  <component name="RunManager" selected="Gradle.PuTao [run]">
     <configuration name="PuTao [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -283,8 +307,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.PuTao [packageUberJarForCurrentOS]" />
         <item itemvalue="Gradle.PuTao [run]" />
+        <item itemvalue="Gradle.PuTao [packageUberJarForCurrentOS]" />
         <item itemvalue="Gradle.PuTao [kotlinSourcesJar]" />
         <item itemvalue="Gradle.PuTao [jar]" />
         <item itemvalue="Gradle.PuTao:app [run]" />
@@ -559,16 +583,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/StorageService.kt</url>
-          <line>32</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/StorageService.kt</url>
-          <line>46</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/AddInstrumentDialog.kt</url>
           <line>44</line>

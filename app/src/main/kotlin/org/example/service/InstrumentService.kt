@@ -6,11 +6,29 @@ import org.example.domain.InstrumentType
 import org.example.validation.InstrumentValidator
 import java.time.Instant
 import java.util.TreeMap
+import org.example.storage.saveLoad.InstrumentSaveLoad
+import java.sql.Connection
 
-class InstrumentService {
+class InstrumentService(private val connection: Connection? = null)  {
 
     private val instruments = TreeMap<Long, Instrument>()
     private var nextId = 1L
+    private val dbStorage = connection?.let { InstrumentSaveLoad.create(it) }
+
+    init {
+        connection?.let {
+            loadFromDatabase()
+        }
+    }
+
+    private fun loadFromDatabase() {
+        dbStorage?.let { storage ->
+            val loaded = storage.load()
+            instruments.clear()
+            instruments.putAll(loaded)
+            nextId = if (loaded.isEmpty()) 1L else loaded.keys.max() + 1L
+        }
+    }
 
     fun add(
         name: String,
@@ -26,6 +44,27 @@ class InstrumentService {
             ?.also { InstrumentValidator.validateInventoryNumber(it) }
 
         val now = Instant.now()
+
+        if (dbStorage != null) {
+            val tempInstrument = Instrument(
+                id = 0,
+                name = name,
+                type = type,
+                inventoryNumber = validatedInventory,
+                location = location,
+                status = InstrumentStatus.ACTIVE,
+                ownerUsername = ownerUsername,
+                createdAt = now,
+                updatedAt = now
+            )
+            val generatedId = dbStorage!!.insert(tempInstrument)
+            if (generatedId != null) {
+                val instrument = tempInstrument.copy(id = generatedId)
+                instruments[generatedId] = instrument
+                return instrument
+            }
+        }
+
         val instrument = Instrument(
             id = nextId++,
             name = name,
@@ -69,6 +108,7 @@ class InstrumentService {
                 ?.also { InstrumentValidator.validateInventoryNumber(it) }
         }
         instrument.updatedAt = Instant.now()
+        dbStorage?.update(id, instrument)
         return instrument
     }
 
@@ -80,6 +120,7 @@ class InstrumentService {
     }
 
     fun delete(id: Long) {
+        dbStorage?.delete(id)
         if (instruments.remove(id) == null) {
             throw NoSuchElementException("Instrument with id=$id not found")
         }
