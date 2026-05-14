@@ -1,14 +1,9 @@
 package org.example.auth
 
-import java.nio.charset.StandardCharsets
-import java.nio.file.Files
-import java.nio.file.Path
-import java.nio.file.Paths
-import org.example.storage.AppData
+import java.sql.Connection
+import java.sql.SQLException
 
-class UserService(
-    private val usersFilePath: Path = AppData.resolve("users.csv")
-) {
+class UserService(private val connection: Connection) {
     private val users = mutableMapOf<String, User>()
     var currentUser: User? = null
         private set
@@ -18,51 +13,64 @@ class UserService(
     val currentUsername: String?
         get() = currentUser?.login
 
-    init { loadUsers() }
+    init {
+        loadUsers()
+    }
 
     fun register(login: String, password: String): Result<User> {
         if (login.isBlank()) return Result.failure(IllegalArgumentException("Login cannot be empty"))
         if (password.isBlank()) return Result.failure(IllegalArgumentException("Password cannot be empty"))
         if (users.containsKey(login)) return Result.failure(IllegalArgumentException("Login '$login' is already taken"))
 
-        val user = User(login, User.hashPassword(password))
-        users[login] = user
-        saveUsers()
-        return Result.success(user)
+        val user = User.create(login, password)
+
+        return try {
+            connection.prepareStatement(
+                "INSERT INTO users (login, password_hash) VALUES (?, ?)"
+            ).use { ps ->
+                ps.setString(1, user.login)
+                ps.setString(2, user.passwordHash)
+                ps.executeUpdate()
+            }
+            users[login] = user
+            Result.success(user)
+        } catch (e: SQLException) {
+            if (e.sqlState == "23505") {
+                Result.failure(IllegalArgumentException("Login '$login' is already taken"))
+            } else {
+                Result.failure(Exception("Database error: ${e.message}"))
+            }
+        }
     }
 
     fun login(login: String, password: String): Result<User> {
-        val user = users[login] ?: return Result.failure(IllegalArgumentException("User '$login' not found"))
-        if (!user.checkPassword(password)) return Result.failure(IllegalArgumentException("Incorrect password"))
+        val user = users[login]
+            ?: return Result.failure(IllegalArgumentException("User '$login' not found"))
+        if (!user.checkPassword(password))
+            return Result.failure(IllegalArgumentException("Incorrect password"))
         currentUser = user
         return Result.success(user)
     }
 
-    fun logout() { currentUser = null }
-
-    private fun saveUsers() {
-        Files.createDirectories(usersFilePath.parent ?: Paths.get("."))
-        Files.newBufferedWriter(usersFilePath, StandardCharsets.UTF_8).use { writer ->
-            writer.write("login,passwordHash\n")
-            users.values.forEach { user ->
-                writer.write("${user.login},${user.passwordHash}\n")
-            }
-        }
+    fun logout() {
+        currentUser = null
     }
 
     private fun loadUsers() {
-        if (!Files.exists(usersFilePath)) return
-        val lines = Files.readAllLines(usersFilePath, StandardCharsets.UTF_8)
-        if (lines.size < 2) return
-        lines.drop(1).filter { it.isNotBlank() }.forEach { line ->
-            val parts = line.split(",")
-            if (parts.size >= 2) {
-                val user = User(parts[0].trim(), parts[1].trim())
-                users[user.login] = user
+        try {
+            connection.createStatement().use { stmt ->
+                stmt.executeQuery("SELECT login, password_hash FROM users").use { rs ->
+                    while (rs.next()) {
+                        val user = User(
+                            login = rs.getString("login"),
+                            passwordHash = rs.getString("password_hash")
+                        )
+                        users[user.login] = user
+                    }
+                }
             }
+        } catch (e: SQLException) {
+            System.err.println("Warning: Cannot load users from database: ${e.message}")
         }
     }
 }
-// в общем: теперь нельзя использовать все символы,
-// которые при доставании из цсв файла могут вызвать проблемы (запятые кавычки)
-// поэтому лишние методы можно убрать

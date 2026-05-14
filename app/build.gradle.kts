@@ -16,6 +16,7 @@ dependencies {
     implementation("com.mohamedrejeb.calf:calf-file-picker:0.5.3")
     implementation("com.mohamedrejeb.calf:calf-file-picker-coil:0.5.1")
     implementation("io.coil-kt.coil3:coil-compose:3.0.0-alpha08")
+    implementation("org.postgresql:postgresql:42.7.1")
     testImplementation(kotlin("test"))
 }
 

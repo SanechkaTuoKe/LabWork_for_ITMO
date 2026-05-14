@@ -2,7 +2,7 @@ package org.example.domain
 
 import java.time.Instant
 
-class Instrument(
+data class Instrument(
     val id: Long,
     var name: String,
     val type: InstrumentType,
