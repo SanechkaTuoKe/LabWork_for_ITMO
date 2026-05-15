@@ -221,8 +221,11 @@ class InstrumentController(
             isLoading.value = true
             try {
                 val all = instrumentService.getAll()
-                instruments.value = all.filter { it.ownerUsername == owner }
-                status.value = "Loaded instruments for $owner"
+                val loadedByOwner = all.filter { it.ownerUsername == owner }
+                val currentIds = instruments.value.map { it.id }.toSet()
+                val newOnes = loadedByOwner.filter { it.id !in currentIds }
+                instruments.value = instruments.value + newOnes
+                status.value = "Added ${newOnes.size} instruments from $owner"
             } catch (e: Exception) {
                 error.value = e.message
             }
