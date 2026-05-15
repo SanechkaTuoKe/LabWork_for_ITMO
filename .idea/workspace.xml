@@ -10,38 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="854374bb-eed7-42f4-a74d-ca8fcde7fecf" name="Changes" comment="во время сдачи">
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/LoadByOwnerDialog.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/App.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/App.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/BaseHandler.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/CalAddHandler.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/CalListHandler.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/CalShowHandler.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/ErrorHandler.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/ExitHandler.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/HelpHandler.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/InstAddHandler.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/InstDueHandler.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/InstListHandler.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/InstShowHandler.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/InstUpdateHandler.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/LoadHandler.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/MaintAddHandler.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/MaintListHandler.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/handlers/SaveHandler.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/services/CommandService.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/services/LoopService.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/services/ReaderService.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/cli/util/Param.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/CalibrationService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/CalibrationService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/InstrumentService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/InstrumentService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/MaintenanceService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/MaintenanceService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/StorageService.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/CalibrationSaveLoad.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/CalibrationSaveLoad.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/InstrumentSaveLoad.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/InstrumentSaveLoad.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/MaintenanceSaveLoad.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/MaintenanceSaveLoad.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/MainView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/MainView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/auth/UserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/auth/UserService.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/InstrumentController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/InstrumentController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/test/resources/database.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/resources/database.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,37 +123,37 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Gradle.Download Sources.executor": "Run",
-    "Gradle.Load Gradle Dependencies.executor": "Run",
-    "Gradle.PuTao [clean].executor": "Run",
-    "Gradle.PuTao [jar].executor": "Run",
-    "Gradle.PuTao [kotlinSourcesJar].executor": "Run",
-    "Gradle.PuTao [packageUberJarForCurrentOS].executor": "Run",
-    "Gradle.PuTao [run].executor": "Run",
-    "Gradle.PuTao:app [:app:org.example.AppKt.main()].executor": "Run",
-    "Gradle.PuTao:app [run].executor": "Run",
-    "Kotlin.AppKt.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "FinalStep",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/User/Projects/PuTao",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Load Gradle Dependencies.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PuTao [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PuTao [jar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PuTao [kotlinSourcesJar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PuTao [packageUberJarForCurrentOS].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PuTao [run].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PuTao:app [:app:org.example.AppKt.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.PuTao:app [run].executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.AppKt.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;FinalStep&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Projects/PuTao&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateKotlinClassDialog.RecentsKey">
       <recent name="org.example.ui.instruments.dialogs" />

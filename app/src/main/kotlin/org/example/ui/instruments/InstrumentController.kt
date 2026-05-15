@@ -215,4 +215,19 @@ class InstrumentController(
 
         return username
     }
+
+    fun loadByOwner(owner: String) {
+        scope.launch {
+            isLoading.value = true
+            try {
+                val all = instrumentService.getAll()
+                instruments.value = all.filter { it.ownerUsername == owner }
+                status.value = "Loaded instruments for $owner"
+            } catch (e: Exception) {
+                error.value = e.message
+            }
+            isLoading.value = false
+        }
+    }
+
 }

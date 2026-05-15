@@ -22,6 +22,7 @@ import org.example.ui.instruments.InstrumentMasterView
 import org.example.ui.instruments.dialogs.AddInstrumentDialog
 import org.example.ui.instruments.dialogs.CalibrationDialog
 import org.example.ui.instruments.dialogs.EditInstrumentDialog
+import org.example.ui.instruments.dialogs.LoadByOwnerDialog
 import org.example.ui.instruments.dialogs.MaintenanceDialog
 import java.time.Instant
 
@@ -31,8 +32,10 @@ fun MainScreen(
     controller: InstrumentController,
     calibrationService: CalibrationService,
     maintenanceService: MaintenanceService
+
 ) {
     var isLoggedIn by remember { mutableStateOf(userService.isLoggedIn) }
+    var showLoadByOwner by remember { mutableStateOf(false) }
 
     if (!isLoggedIn) {
         AuthView(
@@ -71,6 +74,8 @@ fun MainScreen(
 
             Button(onClick = { controller.refresh() }) { Text("Refresh") }
             Button(onClick = { showAdd = true }) { Text("Add") }
+            Button(onClick = { showLoadByOwner = true }) { Text("Load") }
+
 
             Spacer(Modifier.weight(1f))
 
@@ -222,5 +227,16 @@ fun MainScreen(
                 onDismiss = { showMaint = false }
             )
         }
+    }
+
+    if (showLoadByOwner) {
+        LoadByOwnerDialog(
+            userService = userService,
+            onSelect = { owner ->
+                controller.loadByOwner(owner)
+                showLoadByOwner = false
+            },
+            onDismiss = { showLoadByOwner = false }
+        )
     }
 }

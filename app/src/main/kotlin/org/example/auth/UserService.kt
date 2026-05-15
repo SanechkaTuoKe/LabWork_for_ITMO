@@ -17,6 +17,21 @@ class UserService(private val connection: Connection) {
         loadUsers()
     }
 
+    fun getAllUsers(): List<String> {
+        val users = mutableListOf<String>()
+        connection.createStatement().use { stmt ->
+            stmt.executeQuery("SELECT login FROM users ORDER BY login").use { rs ->
+                while (rs.next()) {
+                    users.add(rs.getString("login"))
+                }
+            }
+        }
+        return users
+    }
+    // я не очень понимаю смысл save/load из предыдущих этапов когда уже есть база данных,
+    // поэтому мне кажется логичным добавить загрузку по пользователю и вообще убрать сохранение
+    // т.к. все равно все инструменты и калибровки сохраняются на сервере
+
     fun register(login: String, password: String): Result<User> {
         if (login.isBlank()) return Result.failure(IllegalArgumentException("Login cannot be empty"))
         if (password.isBlank()) return Result.failure(IllegalArgumentException("Password cannot be empty"))
