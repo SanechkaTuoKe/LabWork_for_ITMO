@@ -142,6 +142,9 @@ class DatabaseSaveLoad<T, ID : Any>(
         return when (value) {
             is java.math.BigDecimal -> value.toLong()
             is java.math.BigInteger -> value.toLong()
+            is Integer -> value.toLong()
+            is Short -> value.toLong()
+            is Long -> value
             else -> value
         }
     }
