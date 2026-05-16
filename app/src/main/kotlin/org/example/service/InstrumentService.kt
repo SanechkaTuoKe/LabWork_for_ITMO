@@ -21,7 +21,7 @@ class InstrumentService(private val connection: Connection? = null)  {
         }
     }
 
-    private fun loadFromDatabase() {
+    fun loadFromDatabase() {
         dbStorage?.let { storage ->
             val loaded = storage.load()
             instruments.clear()

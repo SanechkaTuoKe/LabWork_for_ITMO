@@ -28,12 +28,14 @@ class InstrumentController(
         refresh()
     }
 
+
     fun refresh() {
         scope.launch {
             isLoading.value = true
             try {
-                val username = userService.currentUsername
+                instrumentService.loadFromDatabase()
 
+                val username = userService.currentUsername
                 val all = instrumentService.getAll()
 
                 instruments.value = if (username != null) {
@@ -232,5 +234,4 @@ class InstrumentController(
             isLoading.value = false
         }
     }
-
-}
+    }

@@ -10,9 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="854374bb-eed7-42f4-a74d-ca8fcde7fecf" name="Changes" comment="во время сдачи">
-      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/dialogs/LoadByOwnerDialog.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/auth/UserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/auth/UserService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/InstrumentService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/service/InstrumentService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/AppData.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/saveLoad/ServiceSaveLoad.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/storageValidation/CalibrationStorageValidator.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/storageValidation/InstrumentStorageValidator.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/storageValidation/MaintenanceStorageValidator.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/storage/storageValidation/StorageValidator.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/InstrumentController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/org/example/ui/instruments/InstrumentController.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -166,7 +171,7 @@
       <recent name="org.example.CLI.handlers" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.PuTao [run]">
+  <component name="RunManager" selected="Gradle.PuTao [packageUberJarForCurrentOS]">
     <configuration name="PuTao [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -279,8 +284,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.PuTao [run]" />
         <item itemvalue="Gradle.PuTao [packageUberJarForCurrentOS]" />
+        <item itemvalue="Gradle.PuTao [run]" />
         <item itemvalue="Gradle.PuTao [kotlinSourcesJar]" />
         <item itemvalue="Gradle.PuTao [jar]" />
         <item itemvalue="Gradle.PuTao:app [run]" />
@@ -511,7 +516,23 @@
       <option name="project" value="LOCAL" />
       <updated>1777067065163</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="при загрузке инструментов остаются свои + новые, а не только новые">
+      <option name="closed" value="true" />
+      <created>1778878509147</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1778878509147</updated>
+    </task>
+    <task id="LOCAL-00029" summary="были проблемы с величинами">
+      <option name="closed" value="true" />
+      <created>1778878807067</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1778878807067</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -526,7 +547,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="одинаковая форма ввода команд" />
     <MESSAGE value="косметическое изменение" />
     <MESSAGE value="исправлена обработка ошибок" />
     <MESSAGE value="для апдейта калибровки" />
@@ -550,7 +570,9 @@
     <MESSAGE value="проверить, работает ли кли, потом вообще все удалить" />
     <MESSAGE value="нормальные цвета" />
     <MESSAGE value="цвет" />
-    <option name="LAST_COMMIT_MESSAGE" value="цвет" />
+    <MESSAGE value="при загрузке инструментов остаются свои + новые, а не только новые" />
+    <MESSAGE value="были проблемы с величинами" />
+    <option name="LAST_COMMIT_MESSAGE" value="были проблемы с величинами" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
