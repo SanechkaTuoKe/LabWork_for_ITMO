@@ -52,4 +52,13 @@ object DatabaseConfig {
             System.err.println("Error closing connection: ${e.message}")
         }
     }
+
+    fun reconnect(url: String, user: String, password: String): Connection {
+        closeConnection()
+        currentUrl = url
+        currentUser = user
+        currentPassword = password
+        connection = DriverManager.getConnection(url, user, password)
+        return connection!!
+    }
 }
