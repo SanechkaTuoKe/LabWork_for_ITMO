@@ -22,7 +22,7 @@ class CalibrationService(
         }
     }
 
-    private fun loadFromDatabase() {
+    public fun loadFromDatabase() {
         dbStorage?.let { storage ->
             val loaded = storage.load()
             calibrations.clear()
@@ -112,6 +112,8 @@ class CalibrationService(
         }
         calibrations.entries.removeIf { it.value.instrumentId == instrumentId }
     }
+
+
 
     fun loadAll(loaded: Map<Long, Calibration>) {
         calibrations.clear()

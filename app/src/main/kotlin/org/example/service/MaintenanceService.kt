@@ -22,7 +22,7 @@ class MaintenanceService(
         }
     }
 
-    private fun loadFromDatabase() {
+    fun loadFromDatabase() {
         dbStorage?.let { storage ->
             val loaded = storage.load()
             maintenances.clear()

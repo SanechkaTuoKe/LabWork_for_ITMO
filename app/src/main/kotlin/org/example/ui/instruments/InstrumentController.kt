@@ -15,6 +15,7 @@ class InstrumentController(
 ) {
 
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+    private var autoRefreshJob: Job? = null
 
     val instruments = mutableStateOf<List<Instrument>>(emptyList())
     val selected = mutableStateOf<Instrument?>(null)
@@ -26,14 +27,54 @@ class InstrumentController(
 
     init {
         refresh()
+        startAutoRefresh()
     }
 
+    fun startAutoRefresh() {
+        autoRefreshJob?.cancel()
+        autoRefreshJob = scope.launch {
+            while (isActive) {
+                delay(3000L)
+                refreshSilent()
+            }
+        }
+    }
+
+    fun stopAutoRefresh() {
+        autoRefreshJob?.cancel()
+    }
+
+    private suspend fun refreshSilent() {
+        try {
+            instrumentService.loadFromDatabase()
+            calibrationService.loadFromDatabase()
+            maintenanceService.loadFromDatabase()
+
+            val username = userService.currentUsername
+            val all = instrumentService.getAll()
+
+            val newList = if (username != null) {
+                all.filter { it.ownerUsername == username }
+            } else {
+                emptyList()
+            }
+
+            val selectedId = selected.value?.id
+            val stillExists = newList.any { it.id == selectedId }
+
+            instruments.value = newList
+            if (!stillExists) selected.value = null
+
+        } catch (_: Exception) { }
+    }
 
     fun refresh() {
         scope.launch {
             isLoading.value = true
             try {
                 instrumentService.loadFromDatabase()
+                calibrationService.loadFromDatabase()
+                maintenanceService.loadFromDatabase()
 
                 val username = userService.currentUsername
                 val all = instrumentService.getAll()
@@ -88,9 +129,7 @@ class InstrumentController(
                 }
 
                 instrumentService.update(id, name, location, inventory)
-
                 selected.value = instrumentService.getById(id)
-
                 refresh()
                 status.value = "Updated"
             } catch (e: Exception) {
@@ -136,7 +175,6 @@ class InstrumentController(
                 }
 
                 instrumentService.changeStatus(id, newStatus)
-
                 refresh()
                 status.value = "Status changed"
             } catch (e: Exception) {
@@ -156,15 +194,7 @@ class InstrumentController(
 
         scope.launch {
             try {
-                calibrationService.add(
-                    instrumentId,
-                    type,
-                    result,
-                    comment,
-                    username,
-                    date
-                )
-
+                calibrationService.add(instrumentId, type, result, comment, username, date)
                 calibrationUpdateCounter.value++
                 status.value = "Calibration added"
             } catch (e: Exception) {
@@ -183,14 +213,7 @@ class InstrumentController(
 
         scope.launch {
             try {
-                maintenanceService.add(
-                    instrumentId,
-                    type,
-                    details,
-                    username,
-                    date
-                )
-
+                maintenanceService.add(instrumentId, type, details, username, date)
                 maintenanceUpdateCounter.value++
                 status.value = "Maintenance added"
             } catch (e: Exception) {
@@ -234,4 +257,4 @@ class InstrumentController(
             isLoading.value = false
         }
     }
-    }
+}
