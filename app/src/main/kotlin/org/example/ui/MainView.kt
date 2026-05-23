@@ -15,12 +15,14 @@ import org.example.domain.InstrumentStatus
 import org.example.domain.Maintenance
 import org.example.service.CalibrationService
 import org.example.service.MaintenanceService
+import org.example.storage.DatabaseConfig
 import org.example.ui.auth.AuthView
 import org.example.ui.instruments.InstrumentController
 import org.example.ui.instruments.InstrumentDetailView
 import org.example.ui.instruments.InstrumentMasterView
 import org.example.ui.instruments.dialogs.AddInstrumentDialog
 import org.example.ui.instruments.dialogs.CalibrationDialog
+import org.example.ui.instruments.dialogs.ConnectionDialog
 import org.example.ui.instruments.dialogs.EditInstrumentDialog
 import org.example.ui.instruments.dialogs.LoadByOwnerDialog
 import org.example.ui.instruments.dialogs.MaintenanceDialog
@@ -52,6 +54,7 @@ fun MainScreen(
     var showEdit by remember { mutableStateOf(false) }
     var showCal by remember { mutableStateOf(false) }
     var showMaint by remember { mutableStateOf(false) }
+    var showConnection by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -94,6 +97,10 @@ fun MainScreen(
                 isLoggedIn = false
             }) {
                 Text("Logout", color = MaterialTheme.colorScheme.onPrimary)
+            }
+
+            TextButton(onClick = { showConnection = true }) {
+                Text("DB", color = MaterialTheme.colorScheme.onPrimary)
             }
         }
 
@@ -237,6 +244,21 @@ fun MainScreen(
                 showLoadByOwner = false
             },
             onDismiss = { showLoadByOwner = false }
+        )
+    }
+    if (showConnection) {
+        ConnectionDialog(
+            currentUrl = DatabaseConfig.currentUrl,
+            currentUser = DatabaseConfig.currentUser,
+            currentPassword = DatabaseConfig.currentPassword,
+            onConfirm = { url, user, password ->
+                try {
+                    DatabaseConfig.reconnect(url, user, password)
+                    showConnection = false
+                } catch (e: Exception) {
+                }
+            },
+            onDismiss = { showConnection = false }
         )
     }
 }

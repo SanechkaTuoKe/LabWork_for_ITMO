@@ -7,6 +7,9 @@ import java.util.Properties
 
 object DatabaseConfig {
     private var connection: Connection? = null
+    var currentUrl: String = ""
+    var currentUser: String = ""
+    var currentPassword: String = ""
 
     fun getConnection(): Connection {
         connection?.let {
@@ -32,6 +35,9 @@ object DatabaseConfig {
         val password = props.getProperty("db.password")
             ?: System.getenv("DB_PASSWORD")
             ?: "admin123"
+        currentUrl = url
+        currentUser = user
+        currentPassword = password
 
         return try {
             connection = DriverManager.getConnection(url, user, password)

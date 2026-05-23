@@ -17,6 +17,9 @@ class InstrumentController(
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
     private var autoRefreshJob: Job? = null
 
+    private var filterMode = "mine"
+    private var filterOwner: String? = null
+
     val instruments = mutableStateOf<List<Instrument>>(emptyList())
     val selected = mutableStateOf<Instrument?>(null)
     val isLoading = mutableStateOf(false)
@@ -50,13 +53,14 @@ class InstrumentController(
             calibrationService.loadFromDatabase()
             maintenanceService.loadFromDatabase()
 
-            val username = userService.currentUsername
             val all = instrumentService.getAll()
-
-            val newList = if (username != null) {
-                all.filter { it.ownerUsername == username }
-            } else {
-                emptyList()
+            val newList = when (filterMode) {
+                "mine" -> {
+                    val username = userService.currentUsername
+                    all.filter { it.ownerUsername == username }
+                }
+                "all" -> all
+                else -> all.filter { it.ownerUsername == filterOwner }
             }
 
             val selectedId = selected.value?.id
@@ -69,6 +73,8 @@ class InstrumentController(
     }
 
     fun refresh() {
+        filterMode = "mine"
+        filterOwner = null
         scope.launch {
             isLoading.value = true
             try {
@@ -122,12 +128,10 @@ class InstrumentController(
         scope.launch {
             try {
                 val inst = instrumentService.getById(id)
-
                 if (inst != null && inst.ownerUsername != username) {
                     error.value = "You don't have permission to edit this instrument"
                     return@launch
                 }
-
                 instrumentService.update(id, name, location, inventory)
                 selected.value = instrumentService.getById(id)
                 refresh()
@@ -143,18 +147,14 @@ class InstrumentController(
         scope.launch {
             try {
                 val inst = instrumentService.getById(id)
-
                 if (inst != null && inst.ownerUsername != username) {
                     error.value = "You don't have permission to delete this instrument"
                     return@launch
                 }
-
                 instrumentService.delete(id)
-
                 if (selected.value?.id == id) {
                     selected.value = null
                 }
-
                 refresh()
                 status.value = "Deleted"
             } catch (e: Exception) {
@@ -168,12 +168,10 @@ class InstrumentController(
         scope.launch {
             try {
                 val inst = instrumentService.getById(id)
-
                 if (inst != null && inst.ownerUsername != username) {
                     error.value = "No permission"
                     return@launch
                 }
-
                 instrumentService.changeStatus(id, newStatus)
                 refresh()
                 status.value = "Status changed"
@@ -184,14 +182,10 @@ class InstrumentController(
     }
 
     fun addCalibration(
-        instrumentId: Long,
-        type: String,
-        result: String,
-        comment: String?,
-        date: Instant
+        instrumentId: Long, type: String, result: String,
+        comment: String?, date: Instant
     ) {
         val username = requireAuth() ?: return
-
         scope.launch {
             try {
                 calibrationService.add(instrumentId, type, result, comment, username, date)
@@ -204,13 +198,10 @@ class InstrumentController(
     }
 
     fun addMaintenance(
-        instrumentId: Long,
-        type: MaintenanceType,
-        details: String,
-        date: Instant
+        instrumentId: Long, type: MaintenanceType,
+        details: String, date: Instant
     ) {
         val username = requireAuth() ?: return
-
         scope.launch {
             try {
                 maintenanceService.add(instrumentId, type, details, username, date)
@@ -222,29 +213,25 @@ class InstrumentController(
         }
     }
 
-    fun clearError() {
-        error.value = null
-    }
-
-    fun clearStatus() {
-        status.value = "Ready"
-    }
+    fun clearError() { error.value = null }
+    fun clearStatus() { status.value = "Ready" }
 
     private fun requireAuth(): String? {
         val username = userService.currentUsername
-
         if (username == null) {
             error.value = "You must be logged in"
             return null
         }
-
         return username
     }
 
     fun loadByOwner(owner: String) {
+        filterMode = "owner"
+        filterOwner = owner
         scope.launch {
             isLoading.value = true
             try {
+                instrumentService.loadFromDatabase()
                 val all = instrumentService.getAll()
                 val loadedByOwner = all.filter { it.ownerUsername == owner }
                 val currentIds = instruments.value.map { it.id }.toSet()
