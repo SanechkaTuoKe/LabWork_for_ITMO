@@ -9,7 +9,6 @@
 - **Kotlin 2.0.21** + **Compose Multiplatform 1.7.0** — UI и логика
 - **Compose Material3** — компоненты интерфейса
 - **PostgreSQL + JDBC** (`postgresql:42.7.1`) — персистентное хранилище
-- **Calf File Picker** — нативный диалог выбора файла
 - **Gradle** (Kotlin DSL) — сборка
 
 ---
